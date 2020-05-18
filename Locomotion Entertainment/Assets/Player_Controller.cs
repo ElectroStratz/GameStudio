@@ -8,7 +8,11 @@ public class Player_Controller : MonoBehaviour
     Camera cameraMain;
     NavMeshAgent player;
     Vector3 point;
-    
+
+    public float speed = 3.5f;
+    public float rotationSpeed = 100.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,7 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             Ray directionClick = cameraMain.ScreenPointToRay(Input.mousePosition);//ray casted from camera prespective
             RaycastHit hit;
@@ -28,6 +32,18 @@ public class Player_Controller : MonoBehaviour
             {
                 player.SetDestination(hit.point); //transforms hit into Vector 3
             }
-        }
+        }*/
+        
+        float translation = Input.GetAxis("Vertical") * speed;
+        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+
+        translation *= Time.deltaTime;
+        rotation *= Time.deltaTime;
+
+        // Move translation along the object's z-axis
+        transform.Translate(0, 0, translation);
+
+        // Rotate around our y-axis
+        transform.Rotate(0, rotation, 0);
     }
 }
