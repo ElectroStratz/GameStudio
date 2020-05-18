@@ -55,8 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Camera_Controller.cs" />
-     <Compile Include="Assets\Player_Controller.cs" />
+     <Compile Include="Assets\Camera\Camera_Controller.cs" />
+     <Compile Include="Assets\Player\Player_Controller.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Unity Projects/GameStudio/Locomotion Entertainment/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
