@@ -55,7 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BuildSystem.cs" />
      <Compile Include="Assets\Camera\Camera_Controller.cs" />
+     <Compile Include="Assets\GridSystem.cs" />
      <Compile Include="Assets\Player\Player_Controller.cs" />
      <Compile Include="Assets\Player_Attributes.cs" />
  <Reference Include="Unity.Timeline.Editor">
