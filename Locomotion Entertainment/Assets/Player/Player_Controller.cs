@@ -8,6 +8,7 @@ public class Player_Controller : MonoBehaviour
     Camera cameraMain;
     NavMeshAgent player;
     Vector3 point;
+    Animator animator;
 
     public float speed = 3.5f;
     public float rotationSpeed = 100.0f;
@@ -18,6 +19,7 @@ public class Player_Controller : MonoBehaviour
     {
         cameraMain = Camera.main;
         player = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,9 @@ public class Player_Controller : MonoBehaviour
 
         // Move translation along the object's z-axis
         transform.Translate(0, 0, translation);
+
+        //plays the animation on movement
+        animator.SetFloat("Movement", translation*50f);
 
         // Rotate around our y-axis
         transform.Rotate(0, rotation, 0);
