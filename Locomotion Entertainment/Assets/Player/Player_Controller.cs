@@ -10,8 +10,8 @@ public class Player_Controller : MonoBehaviour
     Vector3 point;
     Animator animator;
 
-    public float speed = 3.5f;
-    public float rotationSpeed = 100.0f;
+    private float speed = 3.5f;
+    private float rotationSpeed = 100.0f;
 
 
     // Start is called before the first frame update

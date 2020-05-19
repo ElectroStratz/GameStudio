@@ -552,8 +552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdca2be93b878a46a841baa2e9fb049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
-  rotationSpeed: 100
 --- !u!1 &1447715549
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +617,8 @@ MonoBehaviour:
     type: 3}
   buildingReference: {fileID: 5960333613982682192, guid: c9c2e829054d86f48970f25b80903f66,
     type: 3}
+  nextPosition: {x: 0, y: 0, z: 0}
+  isBuilding: 0
 --- !u!4 &1616330634
 Transform:
   m_ObjectHideFlags: 0
