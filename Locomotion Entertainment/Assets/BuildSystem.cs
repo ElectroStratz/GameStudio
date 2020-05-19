@@ -6,6 +6,8 @@ public class BuildSystem : MonoBehaviour
 {
     private GridSystem grid;
 
+    public GameObject buildingBlock;
+    public GameObject buildingReference;
     private void Awake()
     {
         grid = FindObjectOfType<GridSystem>();
@@ -24,12 +26,10 @@ public class BuildSystem : MonoBehaviour
             }
         }
     }
-
     private void PlaceCubeNear(Vector3 clickPoint)
     {
         var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
-        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = finalPosition;
-
-        //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = nearPoint;
+        buildingBlock.transform.position = finalPosition;
+        Instantiate(buildingBlock);
     }
 }

@@ -28,7 +28,7 @@ public class GridSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.white;
         for (float x = 0; x < 40; x += size)
         {
             for (float z = 0; z < 40; z += size)
