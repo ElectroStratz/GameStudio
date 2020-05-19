@@ -35,6 +35,14 @@ public class BuildSystem : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            GameObject referenceBlock = GameObject.FindWithTag("BuildReference");
+            if (referenceBlock != null)
+            {
+                GameObject.Destroy(referenceBlock,0);
+            }
+        }
     }
 
     private void ShowSampleCube(Ray ray, RaycastHit hitInfo)
