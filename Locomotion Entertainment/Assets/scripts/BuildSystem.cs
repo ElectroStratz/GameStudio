@@ -79,4 +79,9 @@ public class BuildSystem : MonoBehaviour
         buildingBlock.transform.position = finalPosition;
         Instantiate(buildingBlock);
     }
+
+    public bool GetIsBuilding()
+    {
+        return this.isBuilding;
+    }
 }
