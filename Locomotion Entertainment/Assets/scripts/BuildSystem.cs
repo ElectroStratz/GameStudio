@@ -11,18 +11,16 @@ public class BuildSystem : MonoBehaviour
     public GameObject buildingReference;
     public Vector3 nextPosition;
     public bool isBuilding;
-
-    //inv
+    
     PlayerInv inventory;
-
+    private bool isAllowed;
 
 
     private void Awake()
     {
         grid = FindObjectOfType<GridSystem>();
         isBuilding = false;
-
-        //inv
+        isAllowed = false;
         inventory = GetComponent<PlayerInv>();
     }
 
@@ -37,12 +35,13 @@ public class BuildSystem : MonoBehaviour
             ShowSampleCube(ray, hitInfo);
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit)
+                isAllowed = inventory.RemoveFromInventory("iron", 5);
+
+                if (hit && isAllowed)
                 {
                     PlaceCubeNear(hitInfo.point);
-
-                    //inv
-                    inventory.AddToInventory("iron", 10);
+                    
+                    
                 }
             }
         }
