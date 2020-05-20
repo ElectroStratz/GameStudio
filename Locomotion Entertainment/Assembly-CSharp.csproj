@@ -66,6 +66,8 @@
     <Compile Include="Assets\Player\Player_Controller.cs" />
     <Compile Include="Assets\scripts\BuildSystem.cs" />
     <Compile Include="Assets\scripts\GridSystem.cs" />
+    <Compile Include="Assets\scripts\InventoryItem.cs" />
+    <Compile Include="Assets\scripts\PlayerInv.cs" />
     <Compile Include="Assets\scripts\Player_Attributes.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/elect/Desktop/uma/GD/GameStudio/GameStudio/Locomotion Entertainment/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

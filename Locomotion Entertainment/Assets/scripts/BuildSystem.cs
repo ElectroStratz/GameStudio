@@ -12,10 +12,18 @@ public class BuildSystem : MonoBehaviour
     public Vector3 nextPosition;
     public bool isBuilding;
 
+    //inv
+    PlayerInv inventory;
+
+
+
     private void Awake()
     {
         grid = FindObjectOfType<GridSystem>();
         isBuilding = false;
+
+        //inv
+        inventory = GetComponent<PlayerInv>();
     }
 
     private void Update()
@@ -32,6 +40,9 @@ public class BuildSystem : MonoBehaviour
                 if (hit)
                 {
                     PlaceCubeNear(hitInfo.point);
+
+                    //inv
+                    inventory.AddToInventory("iron", 10);
                 }
             }
         }
