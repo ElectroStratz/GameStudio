@@ -8,6 +8,7 @@ public class Player_Attributes : MonoBehaviour
     [SerializeField]
     private float playerHealth;
     private float currentHealth;
+    private float currentOxygen;
 
     [SerializeField]
     private float playerOxygen;
@@ -20,10 +21,12 @@ public class Player_Attributes : MonoBehaviour
 
     [SerializeField]
     private Image healthUI;
+
+    [SerializeField]
+    private Image oxygenUI;
+
     [SerializeField]
     private float playerTemperature; //????
-
-
 
     void Start()
     {
@@ -33,6 +36,7 @@ public class Player_Attributes : MonoBehaviour
         playerThirst = 100;
         //Game Manager Perhaps
         currentHealth = playerHealth;
+        InvokeRepeating("OxygenLoss", 10, 10);
     }
 
     void Update()
@@ -49,5 +53,11 @@ public class Player_Attributes : MonoBehaviour
     {
         currentHealth -= 1f;
         healthUI.fillAmount = currentHealth / playerHealth;
+    }
+
+    void OxygenLoss()
+    {
+        currentOxygen -= 1f;
+        oxygenUI.fillAmount = currentOxygen / playerOxygen;
     }
 }
