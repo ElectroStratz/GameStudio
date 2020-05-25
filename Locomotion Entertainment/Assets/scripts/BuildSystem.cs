@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BuildSystem : MonoBehaviour
 {
     private GridSystem grid;
+    public NavMeshSurface dynamicNavMesh;
 
     public GameObject buildingBlock;
     public GameObject buildingReference;
@@ -77,6 +79,7 @@ public class BuildSystem : MonoBehaviour
         var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
         buildingBlock.transform.position = finalPosition;
         Instantiate(buildingBlock);
+        dynamicNavMesh.BuildNavMesh();
     }
 
     public bool GetIsBuilding()
