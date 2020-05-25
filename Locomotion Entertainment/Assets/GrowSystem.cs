@@ -16,20 +16,29 @@ public class GrowSystem : MonoBehaviour
         instance = this;
         if (isPlanted)
         {
-            InvokeRepeating("Growth", 5, 5);
+            plantingScript = gameObject.GetComponentInParent<PlantingSystem>();
+                InvokeRepeating("Growth", 5, 5);
+
+
         }
     }
     void Growth()
     {
-        gameObject.transform.localScale = new Vector3(0.2f, transform.localScale.y + 1f, 0.2f);
+        if (growth < 5)
+        {
+            gameObject.transform.localScale = new Vector3(0.2f, transform.localScale.y + 1f, 0.2f);
         growth++;
+        }
+            else
+        {
+            Debug.Log("Ready to Harvest");
+        }
     }
 
     void OnMouseDown()
     {
         if (growth == 5)
         {
-            plantingScript = gameObject.GetComponentInParent<PlantingSystem>();
             plantingScript.isOccupied = false;
             Destroy(gameObject);
         }
