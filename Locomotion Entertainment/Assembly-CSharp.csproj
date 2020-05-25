@@ -56,8 +56,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Camera\Camera_Controller.cs" />
+     <Compile Include="Assets\DayCycle.cs" />
+     <Compile Include="Assets\GrowSystem.cs" />
+     <Compile Include="Assets\PlantingSystem.cs" />
      <Compile Include="Assets\Player\Player_AnimatorController.cs" />
      <Compile Include="Assets\Player\Player_Controller.cs" />
+     <Compile Include="Assets\RobotController.cs" />
      <Compile Include="Assets\scripts\BuildSystem.cs" />
      <Compile Include="Assets\scripts\GridSystem.cs" />
      <Compile Include="Assets\scripts\InventoryItem.cs" />
