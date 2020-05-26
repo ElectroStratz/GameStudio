@@ -143,6 +143,10 @@ public class PlayerInv : MonoBehaviour
     public List<float> itemAmounts;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        }
         for (int i = 0; i < inventorySize; i++)
         {
             itemNames[i] = inventoryItem[i].GetName();
