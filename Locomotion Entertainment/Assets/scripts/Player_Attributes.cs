@@ -36,6 +36,7 @@ public class Player_Attributes : MonoBehaviour
         playerThirst = 100;
         //Game Manager Perhaps
         currentHealth = playerHealth;
+        currentOxygen = playerOxygen;
         InvokeRepeating("OxygenLoss", 10, 10);
     }
 
