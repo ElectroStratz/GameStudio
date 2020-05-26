@@ -46,7 +46,7 @@ public class GrowSystem : MonoBehaviour
         {
             plantingScript.isOccupied = false;
             Destroy(gameObject);
-            inventory.AddToInventory("food", 3);
+            inventory.AddToInventory("food", 3, null);
         }
         else
         {

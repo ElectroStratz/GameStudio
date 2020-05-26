@@ -6,17 +6,20 @@ public class InventoryItem : MonoBehaviour
 {
     private string itemName;
     private float itemAmount;
+    public Sprite iconItem;
 
     public InventoryItem ()
     {
         itemName = "";
         itemAmount = 0;
+        iconItem = null;
     }
 
-    public void AddItem(string item, float amount)
+    public void AddItem(string item, float amount, Sprite icon)
     {
         this.itemName = item;
         this.itemAmount = amount;
+        this.iconItem = icon;
     }
 
     public void AddAmount(float amount)

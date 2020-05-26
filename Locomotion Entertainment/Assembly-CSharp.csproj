@@ -59,6 +59,8 @@
      <Compile Include="Assets\ChestSystem.cs" />
      <Compile Include="Assets\DayCycle.cs" />
      <Compile Include="Assets\GrowSystem.cs" />
+     <Compile Include="Assets\InventorySlotSystem.cs" />
+     <Compile Include="Assets\InventoryUISystem.cs" />
      <Compile Include="Assets\PlantingSystem.cs" />
      <Compile Include="Assets\Player\Player_AnimatorController.cs" />
      <Compile Include="Assets\Player\Player_Controller.cs" />

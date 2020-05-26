@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class IronRock : MonoBehaviour
@@ -39,14 +40,14 @@ public class IronRock : MonoBehaviour
             if(!isDepleted && currentResource > 0)
             {
                 particlesIron.Play();
-                inventory.AddToInventory("iron", 10);
+                inventory.AddToInventory("iron", 10, null);
                 currentResource--;
                 hp_ui.fillAmount = currentResource / sizeResource;
                 this.transform.localScale = new Vector3(transform.localScale.x - 0.05f, transform.localScale.y - 0.05f, transform.localScale.z - 0.05f);
-            }
-            else
-            {
-                isDepleted = true;
+                if(currentResource == 0)
+                {
+                    isDepleted = true;
+                }
             }
 
         }

@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PlayerInv : MonoBehaviour
 {
-    public List<InventoryItem> inventory;
+    public List<InventoryItem> inventoryItem;
+    [SerializeField]
     int inventorySize;
     int emptySlots;
+    public GameObject inventoryPanel;
+    public GameObject inventorySlot;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
 
     private void Awake()
     {
-        inventorySize = 10;
 
         for (int i = 0; i < inventorySize; i++)
         {
-            inventory.Add(new InventoryItem());
+            inventoryItem.Add(new InventoryItem());
+            Instantiate(inventorySlot, inventoryPanel.transform);
+            inventorySlot.transform.parent = inventoryPanel.transform;
         }
         emptySlots = inventorySize;
 
@@ -26,14 +32,14 @@ public class PlayerInv : MonoBehaviour
         }
     }
     
-    public void AddToInventory(string item, float amount)
+    public void AddToInventory(string item, float amount, Sprite icon)
     {
         bool inInventory = false;
         int position = 0;
 
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventory[i].GetName() == item)
+            if (inventoryItem[i].GetName() == item)
             {
                 inInventory = true;
                 position = i;
@@ -43,7 +49,7 @@ public class PlayerInv : MonoBehaviour
 
         if (inInventory)
         {
-            inventory[position].AddAmount(amount);
+            inventoryItem[position].AddAmount(amount);
         }
         else
         {
@@ -51,15 +57,20 @@ public class PlayerInv : MonoBehaviour
             {
                 for (int i = 0; i < inventorySize; i++)
                 {
-                    if (inventory[i].GetName() == "")
+                    if (inventoryItem[i].GetName() == "")
                     {
                         position = i;
                         break;
                     }
                 }
 
-                inventory[position].AddItem(item, amount);
+                inventoryItem[position].AddItem(item, amount, icon);
                 emptySlots--;
+                if(onItemChangedCallback != null)
+                {
+                    onItemChangedCallback.Invoke();
+                }
+
             }
             else
             {
@@ -74,9 +85,9 @@ public class PlayerInv : MonoBehaviour
         
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventory[i].GetName() == item)
+            if (inventoryItem[i].GetName() == item)
             {
-                amount = inventory[i].GetAmount();
+                amount = inventoryItem[i].GetAmount();
                 break;
             }
         }
@@ -92,7 +103,7 @@ public class PlayerInv : MonoBehaviour
 
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventory[i].GetName() == item)
+            if (inventoryItem[i].GetName() == item)
             {
                 inInventory = true;
                 position = i;
@@ -101,7 +112,11 @@ public class PlayerInv : MonoBehaviour
         }
         if (inInventory)
         {
-            possible = inventory[position].RemoveAmount(amount);
+            possible = inventoryItem[position].RemoveAmount(amount);
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
         }
 
         return possible;
@@ -115,8 +130,8 @@ public class PlayerInv : MonoBehaviour
     {
         for (int i = 0; i < inventorySize; i++)
         {
-            itemNames[i] = inventory[i].GetName();
-            itemAmounts[i] = inventory[i].GetAmount();
+            itemNames[i] = inventoryItem[i].GetName();
+            itemAmounts[i] = inventoryItem[i].GetAmount();
         }
     }
 }
