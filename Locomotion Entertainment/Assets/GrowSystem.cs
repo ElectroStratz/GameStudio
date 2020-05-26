@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GrowSystem : MonoBehaviour
 {
+    private PlayerInv inventory;
+    private GameObject manager;
+
     public static GrowSystem instance;
     private float growth;
     public PlantingSystem plantingScript;
@@ -14,6 +17,8 @@ public class GrowSystem : MonoBehaviour
     void Start()
     {
         instance = this;
+        manager = GameObject.FindGameObjectWithTag("GameManager");
+        inventory = manager.GetComponent<PlayerInv>();
         if (isPlanted)
         {
             plantingScript = gameObject.GetComponentInParent<PlantingSystem>();
@@ -41,6 +46,7 @@ public class GrowSystem : MonoBehaviour
         {
             plantingScript.isOccupied = false;
             Destroy(gameObject);
+            inventory.AddToInventory("food", 3);
         }
         else
         {

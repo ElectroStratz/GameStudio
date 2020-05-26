@@ -47,7 +47,7 @@ public class Player_Attributes : MonoBehaviour
         {
             TakeDamage();
         }
-
+                                                                                                                                            
     }
 
     void TakeDamage()
