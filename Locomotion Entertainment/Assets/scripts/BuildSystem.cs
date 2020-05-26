@@ -38,12 +38,10 @@ public class BuildSystem : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 isAllowed = inventory.RemoveFromInventory("iron", 5);
-
+                
                 if (hit && isAllowed)
                 {
                     PlaceCubeNear(hitInfo.point);
-                    
-                    
                 }
             }
         }

@@ -3816,6 +3816,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c15825936677f48b56f596485dfdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resourceName: iron
+  _icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  _resourceAmount: 10
+  _resourceSize: 10
+  _refillTime: 1
   hp_ui: {fileID: 840210194}
 --- !u!208 &1185887292
 NavMeshObstacle:

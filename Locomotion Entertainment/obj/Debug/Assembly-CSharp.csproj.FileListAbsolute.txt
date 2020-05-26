@@ -270,3 +270,8 @@ C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\Assembly-CSharp.dll
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\Assembly-CSharp.pdb
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\nunit.framework.dll
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\NavMeshComponentsEditor.pdb
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\NavMeshComponents.pdb
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\nunit.framework.pdb
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\nunit.framework.xml
