@@ -21,4 +21,5 @@ public class InventorySlotSystem : MonoBehaviour
         icon.sprite = null;
         icon.enabled = false;
     }
+
 }

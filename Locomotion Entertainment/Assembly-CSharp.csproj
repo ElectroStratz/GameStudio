@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ActionBarSlotSystem.cs" />
      <Compile Include="Assets\Camera\Camera_Controller.cs" />
      <Compile Include="Assets\ChestSystem.cs" />
      <Compile Include="Assets\DayCycle.cs" />
@@ -63,13 +64,14 @@
      <Compile Include="Assets\Player\Player_AnimatorController.cs" />
      <Compile Include="Assets\Player\Player_Controller.cs" />
      <Compile Include="Assets\RobotController.cs" />
+     <Compile Include="Assets\scripts\ActionBar\ActionBarItem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\ActionBarUISystem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\PlayerActionBar.cs" />
      <Compile Include="Assets\scripts\BuildSystem.cs" />
      <Compile Include="Assets\scripts\GridSystem.cs" />
      <Compile Include="Assets\scripts\Inventory\InventoryItem.cs" />
      <Compile Include="Assets\scripts\Inventory\InventorySlotSystem.cs" />
      <Compile Include="Assets\scripts\Inventory\InventoryUISystem.cs" />
-     <Compile Include="Assets\scripts\Inventory\ItemDragHandler.cs" />
-     <Compile Include="Assets\scripts\Inventory\ItemDropHandler.cs" />
      <Compile Include="Assets\scripts\Inventory\PlayerInv.cs" />
      <Compile Include="Assets\scripts\Player_Attributes.cs" />
      <Compile Include="Assets\scripts\Resources\IronRock.cs" />
