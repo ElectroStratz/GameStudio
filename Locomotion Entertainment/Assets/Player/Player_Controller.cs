@@ -15,6 +15,7 @@ public class Player_Controller : MonoBehaviour
     private float speed = 3.5f;
     private float rotationSpeed = 100.0f;
     private bool hit = false;
+    private string objectTag;
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +40,35 @@ public class Player_Controller : MonoBehaviour
         {
             transform.LookAt(direction);
         }
-
+        
        if (builder.GetIsBuilding() == false)
         {
+            objectTag = hitZone.collider.tag;
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (hit)
                 {
-                    player.SetDestination(hitZone.point); //transforms hit into Vector 3
+                    switch (objectTag)
+                    {
+                        case "Level":
+                            player.SetDestination(hitZone.point); //transforms hit into Vector 3
+                            break;
+                        case "IronRock":
+                            if(Vector3.Distance( player.transform.position, hitZone.point) > 3)
+                            {
+                                player.SetDestination(hitZone.point);
+                            }
+                            break;
+                        case "Chest":
+                            if (Vector3.Distance(player.transform.position, hitZone.point) > 1)
+                            {
+                                player.SetDestination(hitZone.point);
+                            }
+                            break;
+                    }
+
+                    
                 }
             }
         }

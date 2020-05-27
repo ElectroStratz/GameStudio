@@ -6,6 +6,9 @@ TagManager:
   tags:
   - BuildReference
   - GameManager
+  - Level
+  - IronRock
+  - Chest
   layers:
   - Default
   - TransparentFX
