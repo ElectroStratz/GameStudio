@@ -6009,7 +6009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: []
-  inventorySize: 1
+  inventorySize: 20
   inventoryPanel: {fileID: 1963442216}
   inventorySlot: {fileID: 7908138493151498885, guid: 207550999bae48243a746443135e557a,
     type: 3}
@@ -6055,12 +6055,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb86feed00c1274892ef17f111f25f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionbar: []
-  icon: {fileID: 0}
+  actionbarSize: 4
   actionbarPanel: {fileID: 1351741017}
   actionbarSlot: {fileID: 2355342860838766969, guid: 1b6cee94a5e21a4418ddc211343f0338,
     type: 3}
-  actionbarSize: 4
 --- !u!1 &1696855594
 GameObject:
   m_ObjectHideFlags: 0

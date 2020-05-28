@@ -58,4 +58,9 @@ public class InventoryItem : MonoBehaviour
     {
         return this.itemAmount;
     }
+
+    public Sprite GetIcon()
+    {
+        return this.iconItem;
+    }
 }

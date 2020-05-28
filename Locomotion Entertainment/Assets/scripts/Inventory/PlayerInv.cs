@@ -13,6 +13,10 @@ public class PlayerInv : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
+
+    public delegate void OnItemUpdated();
+    public OnItemUpdated onItemUpdatedCallback;
+
     private void Awake()
     {
 
@@ -70,6 +74,10 @@ public class PlayerInv : MonoBehaviour
                 {
                     onItemChangedCallback.Invoke();
                 }
+                if (onItemUpdatedCallback != null)
+                {
+                    onItemUpdatedCallback.Invoke();
+                }
 
             }
             else
@@ -93,6 +101,22 @@ public class PlayerInv : MonoBehaviour
         }
         
         return amount;
+    }
+
+    public Sprite GetItemSprite(string item)
+    {
+        Sprite icon = null;
+
+        for (int i = 0; i < inventorySize; i++)
+        {
+            if (inventory[i].GetName() == item)
+            {
+                icon = inventory[i].GetIcon();
+                break;
+            }
+        }
+
+        return icon;
     }
 
     public bool RemoveFromInventory(string item, float amount)
@@ -125,11 +149,19 @@ public class PlayerInv : MonoBehaviour
                 {
                     onItemChangedCallback.Invoke();
                 }
+                if (onItemUpdatedCallback != null)
+                {
+                    onItemUpdatedCallback.Invoke();
+                }
                 return true;
             case 2: //item still exists in inventory
                 if (onItemChangedCallback != null)
                 {
                     onItemChangedCallback.Invoke();
+                }
+                if (onItemUpdatedCallback != null)
+                {
+                    onItemUpdatedCallback.Invoke();
                 }
                 return true;
         }

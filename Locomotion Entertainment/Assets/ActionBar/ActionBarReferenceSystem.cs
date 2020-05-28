@@ -5,32 +5,32 @@ using UnityEngine.UI;
 
 public class ActionBarReferenceSystem : MonoBehaviour
 {
-    public List<ActionBarItem> actionbar;
+    [SerializeField]
+    public int actionbarSize;
+    
     public GameObject actionbarPanel;
     public GameObject actionbarSlot;
-    public int actionbarSize = 4;
-    int emptySlots;
+    
     ActionBarSlotSystem[] actionbarSlots;
 
 
     PlayerInv _Playerinventory;
-    InventoryItem item;
-    InventorySlotSystem[] inventorySlots;
 
     // Start is called before the first frame update
     void Start()
     {
         _Playerinventory = GetComponent<PlayerInv>();
-        inventorySlots = actionbarPanel.GetComponentsInChildren<InventorySlotSystem>();
-        _Playerinventory.onItemChangedCallback += UpdateUI;
-
+        _Playerinventory.onItemUpdatedCallback += UpdateUI;
+        
+        
+        //build action bar
         for (int i = 0; i < actionbarSize; i++)
         {
-            actionbar.Add(new ActionBarItem());
             Instantiate(actionbarSlot, actionbarPanel.transform);
             actionbarSlot.transform.parent = actionbarPanel.transform;
         }
-        emptySlots = actionbarSize;
+
+        actionbarSlots = actionbarPanel.GetComponentsInChildren<ActionBarSlotSystem>();
     }
 
     // Update is called once per frame
@@ -45,17 +45,18 @@ public class ActionBarReferenceSystem : MonoBehaviour
 
     void UpdateUI()
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        for (int i = 0; i < _Playerinventory.inventorySize; i++)
         {
+            print(_Playerinventory.inventory[i].GetName());
             if (_Playerinventory.inventory[i].GetName() == "food")
             {
-                inventorySlots[i].AddItem(_Playerinventory.inventory[i]);
-                Sprite tempIcon = _Playerinventory.inventory[i].GetComponentInChildren<Sprite>();
-               // actionbarSlots[i].AddItem(actionbar.tempIcon);
+                Sprite icon = _Playerinventory.inventory[i].GetIcon();
+                actionbarSlots[2].AddItem(icon);
+                break;
             }
             else
             {
-                inventorySlots[i].ClearSlot();
+                actionbarSlots[2].ClearSlot();
             }
 
         }
