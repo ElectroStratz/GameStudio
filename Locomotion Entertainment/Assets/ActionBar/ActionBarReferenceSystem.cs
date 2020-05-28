@@ -5,19 +5,35 @@ using UnityEngine.UI;
 
 public class ActionBarReferenceSystem : MonoBehaviour
 {
+    public List<ActionBarItem> actionbar;
     public Image icon;
+    float amount;
+    public GameObject actionbarPanel;
+    public GameObject actionbarSlot;
+    public int actionbarSize = 4;
+    int emptySlots;
+    ActionBarItem actiomItem;
+    ActionBarSlotSystem[] actionbarSlots;
+
+
     PlayerInv _playerinv;
     InventoryItem item;
-
     InventorySlotSystem[] inventorySlots;
-    public Transform actionPanel;
 
     // Start is called before the first frame update
     void Start()
     {
         _playerinv = GetComponent<PlayerInv>();
-        inventorySlots = actionPanel.GetComponentsInChildren<InventorySlotSystem>();
+        inventorySlots = actionbarPanel.GetComponentsInChildren<InventorySlotSystem>();
         _playerinv.onItemChangedCallback += UpdateUI;
+
+        for (int i = 0; i < actionbarSize; i++)
+        {
+            actionbar.Add(new ActionBarItem());
+            Instantiate(actionbarSlot, actionbarPanel.transform);
+            actionbarSlot.transform.parent = actionbarPanel.transform;
+        }
+        emptySlots = actionbarSize;
     }
 
     // Update is called once per frame
@@ -32,18 +48,16 @@ public class ActionBarReferenceSystem : MonoBehaviour
 
     void UpdateUI()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if (_playerinv.inventory[i].GetAmount() > 0)
+            if (_playerinv.inventory[i].GetName() == "food")
             {
-                inventorySlots[i].AddItem(_playerinv.inventory[i]);
             }
             else
             {
-                inventorySlots[i].ClearSlot();
+                actionbarSlots[i].ClearSlot();
             }
 
         }
-        print(inventorySlots.ToString());
     }
 }
