@@ -6,26 +6,23 @@ using UnityEngine.UI;
 public class ActionBarReferenceSystem : MonoBehaviour
 {
     public List<ActionBarItem> actionbar;
-    public Image icon;
-    float amount;
     public GameObject actionbarPanel;
     public GameObject actionbarSlot;
     public int actionbarSize = 4;
     int emptySlots;
-    ActionBarItem actiomItem;
     ActionBarSlotSystem[] actionbarSlots;
 
 
-    PlayerInv _playerinv;
+    PlayerInv _Playerinventory;
     InventoryItem item;
     InventorySlotSystem[] inventorySlots;
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerinv = GetComponent<PlayerInv>();
+        _Playerinventory = GetComponent<PlayerInv>();
         inventorySlots = actionbarPanel.GetComponentsInChildren<InventorySlotSystem>();
-        _playerinv.onItemChangedCallback += UpdateUI;
+        _Playerinventory.onItemChangedCallback += UpdateUI;
 
         for (int i = 0; i < actionbarSize; i++)
         {
@@ -39,9 +36,9 @@ public class ActionBarReferenceSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for( var i = 0; i < _playerinv.inventorySize; i++)
+        for( var i = 0; i < _Playerinventory.inventorySize; i++)
         {
-            var tempinvItem = _playerinv.inventory[i].GetName();
+            var tempinvItem = _Playerinventory.inventory[i].GetName();
             print(tempinvItem);
         }
     }
@@ -50,12 +47,15 @@ public class ActionBarReferenceSystem : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if (_playerinv.inventory[i].GetName() == "food")
+            if (_Playerinventory.inventory[i].GetName() == "food")
             {
+                inventorySlots[i].AddItem(_Playerinventory.inventory[i]);
+                Sprite tempIcon = _Playerinventory.inventory[i].GetComponentInChildren<Sprite>();
+               // actionbarSlots[i].AddItem(actionbar.tempIcon);
             }
             else
             {
-                actionbarSlots[i].ClearSlot();
+                inventorySlots[i].ClearSlot();
             }
 
         }

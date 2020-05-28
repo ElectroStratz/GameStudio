@@ -5,43 +5,30 @@ using UnityEngine;
 public class ActionBarItem : MonoBehaviour
 {
     private string itemName;
-    private float itemAmount;
     public Sprite iconItem;
     public ActionBarItem()
     {
         itemName = "";
-        itemAmount = 0;
         iconItem = null;
     }
-    public void AddItem(string item, float amount, Sprite icon)
+    public void AddItemActionBar(string item, Sprite icon)
     {
         this.itemName = item;
-        this.itemAmount = amount;
         this.iconItem = icon;
     }
 
-    public void AddAmount(float amount)
+    public int RemoveItemIcon(Sprite icon)
     {
-        this.itemAmount += amount;
-    }
-
-    public int RemoveAmount(float amount)
-    {
-        float result = this.itemAmount - amount;
-        if (result < 0)
-        {
-            return 0;
-        }
-        else if (result == 0)
+        Sprite result = icon;
+        if (result == null)
         {
             this.itemName = "";
-            this.itemAmount = 0;
             this.iconItem = null;
             return 1;
         }
         else
         {
-            this.itemAmount = result;
+            this.iconItem = result;
             return 2;
         }
 
@@ -50,10 +37,5 @@ public class ActionBarItem : MonoBehaviour
     public string GetName()
     {
         return this.itemName;
-    }
-
-    public float GetAmount()
-    {
-        return this.itemAmount;
     }
 }

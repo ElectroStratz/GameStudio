@@ -8,9 +8,9 @@ public class ActionBarSlotSystem : MonoBehaviour
     public Image icon;
 
     ActionBarItem item;
-    public void AddItem(ActionBarItem newItem)
+    public void AddItem(Sprite newItem)
     {
-        item = newItem;
+       // item = newItem;
 
         icon.sprite = item.iconItem;
         icon.enabled = true;
