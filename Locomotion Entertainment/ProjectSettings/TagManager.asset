@@ -10,6 +10,7 @@ TagManager:
   - IronRock
   - Chest
   - BuildingBlock
+  - Planter
   layers:
   - Default
   - TransparentFX

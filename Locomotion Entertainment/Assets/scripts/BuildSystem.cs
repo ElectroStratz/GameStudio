@@ -79,15 +79,16 @@ public class BuildSystem : MonoBehaviour
         Ray directionClick = cameraMain.ScreenPointToRay(Input.mousePosition);//ray casted from camera prespective
         RaycastHit hitZone;
         Physics.Raycast(directionClick, out hitZone);
-        if (hitZone.collider.tag != "BuildingBlock")
+        if (hitZone.collider.tag == "BuildingBlock")
+        {
+            Debug.Log("~Ja tem um bloco aqui boi");
+        }
+        else
         {
             buildingBlock.transform.position = finalPosition;
             Instantiate(buildingBlock);
             dynamicNavMesh.BuildNavMesh();
-        }
-        else
-        {
-            Debug.Log("Cant Build Here");
+
         }
 
 

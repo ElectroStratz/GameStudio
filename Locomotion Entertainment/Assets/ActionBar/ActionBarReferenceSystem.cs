@@ -36,11 +36,11 @@ public class ActionBarReferenceSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for( var i = 0; i < _Playerinventory.inventorySize; i++)
+        /*for( var i = 0; i < _Playerinventory.inventorySize; i++)
         {
             var tempinvItem = _Playerinventory.inventory[i].GetName();
             print(tempinvItem);
-        }
+        }*/
     }
 
     void UpdateUI()
