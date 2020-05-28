@@ -8,7 +8,7 @@ public class BuildSystem : MonoBehaviour
 {
     private GridSystem grid;
     public NavMeshSurface dynamicNavMesh;
-
+    Camera cameraMain;
     public GameObject buildingBlock;
     public GameObject buildingReference;
     public Vector3 nextPosition;
@@ -24,6 +24,7 @@ public class BuildSystem : MonoBehaviour
         isBuilding = false;
         isAllowed = false;
         inventory = GetComponent<PlayerInv>();
+        cameraMain = Camera.main;
     }
 
     private void Update()
@@ -75,9 +76,21 @@ public class BuildSystem : MonoBehaviour
     private void PlaceCubeNear(Vector3 clickPoint)
     {
         var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
-        buildingBlock.transform.position = finalPosition;
-        Instantiate(buildingBlock);
-        dynamicNavMesh.BuildNavMesh();
+        Ray directionClick = cameraMain.ScreenPointToRay(Input.mousePosition);//ray casted from camera prespective
+        RaycastHit hitZone;
+        Physics.Raycast(directionClick, out hitZone);
+        if (hitZone.collider.tag != "BuildingBlock")
+        {
+            buildingBlock.transform.position = finalPosition;
+            Instantiate(buildingBlock);
+            dynamicNavMesh.BuildNavMesh();
+        }
+        else
+        {
+            Debug.Log("Cant Build Here");
+        }
+
+
     }
 
     public bool GetIsBuilding()

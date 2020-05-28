@@ -9,6 +9,7 @@ TagManager:
   - Level
   - IronRock
   - Chest
+  - BuildingBlock
   layers:
   - Default
   - TransparentFX
