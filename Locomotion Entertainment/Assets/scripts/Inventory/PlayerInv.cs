@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerInv : MonoBehaviour
 {
-    public List<InventoryItem> inventoryItem;
+    public List<InventoryItem> inventory;
     [SerializeField]
-    int inventorySize;
+    public int inventorySize;
     int emptySlots;
     public GameObject inventoryPanel;
     public GameObject inventorySlot;
@@ -18,7 +18,7 @@ public class PlayerInv : MonoBehaviour
 
         for (int i = 0; i < inventorySize; i++)
         {
-            inventoryItem.Add(new InventoryItem());
+            inventory.Add(new InventoryItem());
             Instantiate(inventorySlot, inventoryPanel.transform);
             inventorySlot.transform.parent = inventoryPanel.transform;
         }
@@ -39,7 +39,7 @@ public class PlayerInv : MonoBehaviour
 
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventoryItem[i].GetName() == item)
+            if (inventory[i].GetName() == item)
             {
                 inInventory = true;
                 position = i;
@@ -49,7 +49,7 @@ public class PlayerInv : MonoBehaviour
 
         if (inInventory)
         {
-            inventoryItem[position].AddAmount(amount);
+            inventory[position].AddAmount(amount);
         }
         else
         {
@@ -57,14 +57,14 @@ public class PlayerInv : MonoBehaviour
             {
                 for (int i = 0; i < inventorySize; i++)
                 {
-                    if (inventoryItem[i].GetName() == "")
+                    if (inventory[i].GetName() == "")
                     {
                         position = i;
                         break;
                     }
                 }
 
-                inventoryItem[position].AddItem(item, amount, icon);
+                inventory[position].AddItem(item, amount, icon);
                 emptySlots--;
                 if(onItemChangedCallback != null)
                 {
@@ -85,9 +85,9 @@ public class PlayerInv : MonoBehaviour
         
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventoryItem[i].GetName() == item)
+            if (inventory[i].GetName() == item)
             {
-                amount = inventoryItem[i].GetAmount();
+                amount = inventory[i].GetAmount();
                 break;
             }
         }
@@ -103,7 +103,7 @@ public class PlayerInv : MonoBehaviour
 
         for (int i = 0; i < inventorySize; i++)
         {
-            if (inventoryItem[i].GetName() == item)
+            if (inventory[i].GetName() == item)
             {
                 inInventory = true;
                 position = i;
@@ -112,7 +112,7 @@ public class PlayerInv : MonoBehaviour
         }
         if (inInventory)
         {
-            itemStatus = inventoryItem[position].RemoveAmount(amount);
+            itemStatus = inventory[position].RemoveAmount(amount);
         }
 
         switch (itemStatus)
@@ -149,8 +149,8 @@ public class PlayerInv : MonoBehaviour
         }
         for (int i = 0; i < inventorySize; i++)
         {
-            itemNames[i] = inventoryItem[i].GetName();
-            itemAmounts[i] = inventoryItem[i].GetAmount();
+            itemNames[i] = inventory[i].GetName();
+            itemAmounts[i] = inventory[i].GetAmount();
         }
     }
 }

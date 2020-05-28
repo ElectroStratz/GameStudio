@@ -26,9 +26,9 @@ public class InventoryUISystem : MonoBehaviour
     {
         for(int i = 0; i<inventorySlots.Length; i++)
         {
-            if(_Playerinventory.inventoryItem[i].GetAmount() > 0)
+            if(_Playerinventory.inventory[i].GetAmount() > 0)
             {
-                inventorySlots[i].AddItem(_Playerinventory.inventoryItem[i]);
+                inventorySlots[i].AddItem(_Playerinventory.inventory[i]);
             }
             else
             {
