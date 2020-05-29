@@ -16,7 +16,6 @@ public class PlayerInv : MonoBehaviour
 
     public delegate void OnItemUpdated();
     public OnItemUpdated onItemUpdatedCallback;
-
     private void Awake()
     {
 
@@ -27,13 +26,15 @@ public class PlayerInv : MonoBehaviour
             inventorySlot.transform.parent = inventoryPanel.transform;
         }
         emptySlots = inventorySize;
-
         //for debugging
         for (int i = 0; i < inventorySize; i++)
         {
             itemNames.Add("");
             itemAmounts.Add(0);
         }
+
+        
+
     }
     
     public void AddToInventory(string item, float amount, Sprite icon)

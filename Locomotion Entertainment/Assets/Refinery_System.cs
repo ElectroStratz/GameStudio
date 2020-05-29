@@ -6,31 +6,30 @@ using UnityEngine.UI;
 public class Refinery_System : MonoBehaviour
 {
     PlayerInv _Playerinventory;
-
+    Camera cameraMain;
     public GameObject refineryPanel;
-    private GameObject player;
-    bool isOpen;
-    bool isCraftable;
+    bool isOpen = false;
+    RaycastHit hitZone;
+
     void Start()
     {
+        cameraMain = Camera.main;
         _Playerinventory = GetComponent<PlayerInv>();
-        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isOpen)
-        {
-            CheckInventory();
-        }
-    }
 
-    private void OnMouseDown()
+    }
+    public void CheckRefineryLocation()
     {
-        isOpen = !isOpen;
-        if(Vector3.Distance(this.transform.position, player.transform.position) < 3)
+        Ray ray = cameraMain.ScreenPointToRay(Input.mousePosition);//ray casted from camera prespective
+        Physics.Raycast(ray, out hitZone);
+        if (hitZone.collider.tag == "Refinery")
         {
+            isOpen = !isOpen;
             if (isOpen)
             {
                 refineryPanel.SetActive(true);
@@ -40,53 +39,25 @@ public class Refinery_System : MonoBehaviour
                 refineryPanel.SetActive(false);
             }
         }
-
     }
-
-    private void CheckInventory()
+    public void CraftItem()
     {
-        for (int i = 0; i < _Playerinventory.inventorySize; i++)
+        Sprite icon1 = _Playerinventory.GetItemSprite("Iron");
+        Sprite icon2 = _Playerinventory.GetItemSprite("Copper");
+        bool component1 = _Playerinventory.RemoveFromInventory("Iron",1);
+        bool component2 = _Playerinventory.RemoveFromInventory("Copper", 1);
+
+        if (!component1 && component2)
         {
-            if (_Playerinventory.inventory[i].GetName() == "iron ore")
-            {
-                print("Yes you have it");
-                int position1 = i;
-                var ammount1 = _Playerinventory.inventory[i].GetAmount();
-                if (_Playerinventory.inventory[i].GetName() == "copper ore")
-                { 
-                    int position2 = i;
-                    var ammount2 = _Playerinventory.inventory[i].GetAmount();
-                    if (ammount1 == 1 && ammount2 == 1)
-                    {
-                        print("You can Craft!");
-                        isCraftable = true;
-                        CraftItem(ammount1, ammount2, position1, position2);
-                    }
-                }
-                else
-                {
-                    print("You Dont Have it");
-                }
-            }
-            else
-            {
-                print("You Dont Have it");
-            }
-
+            _Playerinventory.AddToInventory("Copper", 1, icon2);
         }
-    }
-
-    private void CraftItem(float ammount1, float ammount2, int position1, int position2)
-    {
-        if (isCraftable)
+        if (!component2 && component1)
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _Playerinventory.inventory[position1].RemoveAmount(ammount1);
-                _Playerinventory.inventory[position2].RemoveAmount(ammount2);
-                _Playerinventory.AddToInventory("new item", 1 , null);
-            }
+            _Playerinventory.AddToInventory("Iron", 1, icon1);
         }
-
+        if (component1 && component2)
+        {
+            _Playerinventory.AddToInventory("new item", 1, null);
+        }
     }
 }

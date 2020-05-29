@@ -11,6 +11,7 @@ TagManager:
   - Chest
   - BuildingBlock
   - Planter
+  - Refinery
   layers:
   - Default
   - TransparentFX
