@@ -8,10 +8,13 @@ public class Refinery_System : MonoBehaviour
     PlayerInv _Playerinventory;
 
     public GameObject refineryPanel;
+    private GameObject player;
     bool isOpen;
+    bool isCraftable;
     void Start()
     {
         _Playerinventory = GetComponent<PlayerInv>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -26,14 +29,18 @@ public class Refinery_System : MonoBehaviour
     private void OnMouseDown()
     {
         isOpen = !isOpen;
-        if (isOpen)
+        if(Vector3.Distance(this.transform.position, player.transform.position) < 3)
         {
-            refineryPanel.SetActive(true);
+            if (isOpen)
+            {
+                refineryPanel.SetActive(true);
+            }
+            else
+            {
+                refineryPanel.SetActive(false);
+            }
         }
-        else
-        {
-            refineryPanel.SetActive(false);
-        }
+
     }
 
     private void CheckInventory()
@@ -52,11 +59,8 @@ public class Refinery_System : MonoBehaviour
                     if (ammount1 == 1 && ammount2 == 1)
                     {
                         print("You can Craft!");
-                        if (Input.GetKeyDown(KeyCode.K))
-                        {
-                            _Playerinventory.inventory[position1].RemoveAmount(ammount1);
-                            _Playerinventory.inventory[position2].RemoveAmount(ammount2);
-                        }
+                        isCraftable = true;
+                        CraftItem(ammount1, ammount2, position1, position2);
                     }
                 }
                 else
@@ -70,5 +74,19 @@ public class Refinery_System : MonoBehaviour
             }
 
         }
+    }
+
+    private void CraftItem(float ammount1, float ammount2, int position1, int position2)
+    {
+        if (isCraftable)
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _Playerinventory.inventory[position1].RemoveAmount(ammount1);
+                _Playerinventory.inventory[position2].RemoveAmount(ammount2);
+                _Playerinventory.AddToInventory("new item", 1 , null);
+            }
+        }
+
     }
 }
