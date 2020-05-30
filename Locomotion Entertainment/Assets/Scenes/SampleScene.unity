@@ -3813,6 +3813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: []
   inventorySize: 20
+  maxStack: 8
   inventoryPanel: {fileID: 1963442216}
   inventorySlot: {fileID: 7908138493151498885, guid: 207550999bae48243a746443135e557a,
     type: 3}

@@ -7,7 +7,9 @@ public class PlayerInv : MonoBehaviour
     public List<InventoryItem> inventory;
     [SerializeField]
     public int inventorySize;
-    int emptySlots;
+    [SerializeField]
+    public int maxStack;
+    private int emptySlots;
     public GameObject inventoryPanel;
     public GameObject inventorySlot;
     public delegate void OnItemChanged();
@@ -40,38 +42,88 @@ public class PlayerInv : MonoBehaviour
     public void AddToInventory(string item, float amount, Sprite icon)
     {
         bool inInventory = false;
-        int position = 0;
+        List<int> positions = new List<int>();
+        float remaining = amount;
+        float availableAmount = 0;
 
         for (int i = 0; i < inventorySize; i++)
         {
             if (inventory[i].GetName() == item)
             {
                 inInventory = true;
-                position = i;
-                break;
+                positions.Add(i);
             }
         }
 
         if (inInventory)
         {
-            inventory[position].AddAmount(amount);
-        }
-        else
-        {
-            if (emptySlots != 0)
+            for(int i = 0 ; i < positions.Count ; i++)
             {
-                for (int i = 0; i < inventorySize; i++)
+                availableAmount = maxStack - inventory[positions[i]].GetAmount();
+
+                if(availableAmount > 0)
                 {
-                    if (inventory[i].GetName() == "")
+                    if(availableAmount >= remaining)
                     {
-                        position = i;
+                        inventory[positions[i]].AddAmount(remaining);
+                        remaining = 0;
                         break;
                     }
+                    else
+                    {
+                        inventory[positions[i]].AddAmount(availableAmount);
+                        remaining = remaining - availableAmount;
+                    }
                 }
+            }
+            
+            if(remaining > 0)
+            {
+                positions.Clear();
+                if (emptySlots == 0)
+                {
+                    //inventory full cant handle more
+                    //deal with the remaining that needs to be added
+                }
+                else
+                {
+                    for (int i = 0; i < inventorySize; i++)
+                    {
+                        if (inventory[i].GetName() == "")
+                        {
+                            positions.Add(i);
+                        }
+                    }
 
-                inventory[position].AddItem(item, amount, icon);
-                emptySlots--;
-                if(onItemChangedCallback != null)
+                    for (int i = 0; i < positions.Count; i++)
+                    {
+                        availableAmount = maxStack - inventory[positions[i]].GetAmount();
+
+                        if (availableAmount > 0)
+                        {
+                            if (availableAmount >= remaining)
+                            {
+                                inventory[positions[i]].AddItem(item, remaining, icon);
+                                remaining = 0;
+                                emptySlots--;
+                                break;
+                            }
+                            else
+                            {
+                                inventory[positions[i]].AddItem(item, availableAmount, icon);
+                                remaining = remaining - availableAmount;
+                                emptySlots--;
+                            }
+                        }
+                    }
+
+                    if(remaining > 0)
+                    {
+                        //inventory full
+                    }
+
+                }
+                if (onItemChangedCallback != null)
                 {
                     onItemChangedCallback.Invoke();
                 }
@@ -79,11 +131,61 @@ public class PlayerInv : MonoBehaviour
                 {
                     onItemUpdatedCallback.Invoke();
                 }
-
+            }
+        }
+        else
+        {
+            if (emptySlots == 0)
+            {
+                //inventory full cant handle more
+                //deal with the remaining that needs to be added
             }
             else
             {
-                //Inventory Full
+                for (int i = 0; i < inventorySize; i++)
+                {
+                    if (inventory[i].GetName() == "")
+                    {
+                        positions.Add(i);
+                    }
+                }
+
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    availableAmount = maxStack - inventory[positions[i]].GetAmount();
+
+                    if (availableAmount > 0)
+                    {
+                        if (availableAmount >= remaining)
+                        {
+                            inventory[positions[i]].AddItem(item, remaining, icon);
+                            emptySlots--;
+                            remaining = 0;
+                            break;
+                        }
+                        else
+                        {
+                            inventory[positions[i]].AddItem(item, availableAmount, icon);
+                            remaining = remaining - availableAmount;
+                            emptySlots--;
+                        }
+                    }
+                }
+
+                if (remaining > 0)
+                {
+                    //inventory full
+                }
+
+            }
+            
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
+            if (onItemUpdatedCallback != null)
+            {
+                onItemUpdatedCallback.Invoke();
             }
         }
     }
@@ -96,8 +198,7 @@ public class PlayerInv : MonoBehaviour
         {
             if (inventory[i].GetName() == item)
             {
-                amount = inventory[i].GetAmount();
-                break;
+                amount += inventory[i].GetAmount();
             }
         }
         
@@ -120,52 +221,93 @@ public class PlayerInv : MonoBehaviour
         return icon;
     }
 
+    //needs update
     public bool RemoveFromInventory(string item, float amount)
     {
         bool inInventory = false;
         int itemStatus = 0;
-        int position = 0;
+        float remaining = amount;
+        float availableAmount = 0;
+        List<int> positions = new List<int>();
 
         for (int i = 0; i < inventorySize; i++)
         {
             if (inventory[i].GetName() == item)
             {
                 inInventory = true;
-                position = i;
-                break;
+                positions.Add(i);
             }
         }
         if (inInventory)
         {
-            itemStatus = inventory[position].RemoveAmount(amount);
+            availableAmount = this.GetItemAmount(item);
+            if (availableAmount >= remaining)
+            {
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    availableAmount = inventory[positions[i]].GetAmount();
+                    if (availableAmount >= remaining)
+                    {
+                        itemStatus = inventory[positions[i]].RemoveAmount(remaining);
+                        remaining = 0;
+                        if (itemStatus == 1)
+                        {
+                            emptySlots++;
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        itemStatus = inventory[positions[i]].RemoveAmount(availableAmount);
+                        remaining = remaining - availableAmount;
+                        emptySlots++;
+                    }
+                }
+                if (onItemChangedCallback != null)
+                {
+                    onItemChangedCallback.Invoke();
+                }
+                if (onItemUpdatedCallback != null)
+                {
+                    onItemUpdatedCallback.Invoke();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+                //not enough
+
+            }
+            
         }
 
-        switch (itemStatus)
-        {
-            case 0: //not enough quantity
-                return false;
-            case 1: //item was removed from inventory
-                emptySlots++;
-                if (onItemChangedCallback != null)
-                {
-                    onItemChangedCallback.Invoke();
-                }
-                if (onItemUpdatedCallback != null)
-                {
-                    onItemUpdatedCallback.Invoke();
-                }
-                return true;
-            case 2: //item still exists in inventory
-                if (onItemChangedCallback != null)
-                {
-                    onItemChangedCallback.Invoke();
-                }
-                if (onItemUpdatedCallback != null)
-                {
-                    onItemUpdatedCallback.Invoke();
-                }
-                return true;
-        }
+        //switch (itemStatus)
+        //{
+        //    case 0: //not enough quantity
+        //        return false;
+        //    case 1: //item was removed from inventory
+        //        emptySlots++;
+        //        if (onItemChangedCallback != null)
+        //        {
+        //            onItemChangedCallback.Invoke();
+        //        }
+        //        if (onItemUpdatedCallback != null)
+        //        {
+        //            onItemUpdatedCallback.Invoke();
+        //        }
+        //        return true;
+        //    case 2: //item still exists in inventory
+        //        if (onItemChangedCallback != null)
+        //        {
+        //            onItemChangedCallback.Invoke();
+        //        }
+        //        if (onItemUpdatedCallback != null)
+        //        {
+        //            onItemUpdatedCallback.Invoke();
+        //        }
+        //        return true;
+        //}
 
         return false;
     }

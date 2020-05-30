@@ -38,7 +38,7 @@ public class BuildSystem : MonoBehaviour
             ShowSampleCube(ray, hitInfo);
             if (Input.GetMouseButtonDown(0))
             {
-                isAllowed = inventory.RemoveFromInventory("iron", 5);
+                isAllowed = inventory.RemoveFromInventory("Iron", 5);
                 
                 if (hit && isAllowed)
                 {
