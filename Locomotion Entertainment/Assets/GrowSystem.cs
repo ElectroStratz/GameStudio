@@ -22,7 +22,7 @@ public class GrowSystem : MonoBehaviour
         if (isPlanted)
         {
             plantingScript = gameObject.GetComponentInParent<PlantingSystem>();
-                InvokeRepeating("Growth", 5, 5);
+                InvokeRepeating("Growth", 1, 5);
 
 
         }
@@ -31,7 +31,7 @@ public class GrowSystem : MonoBehaviour
     {
         if (growth < 5)
         {
-            gameObject.transform.localScale = new Vector3(0.2f, transform.localScale.y + 1f, 0.2f);
+            gameObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + 1f, transform.localScale.z);
         growth++;
         }
             else
