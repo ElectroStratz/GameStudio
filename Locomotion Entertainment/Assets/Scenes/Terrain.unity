@@ -27282,6 +27282,7 @@ GameObject:
   - component: {fileID: 4411000832820291959}
   - component: {fileID: 4411000832820291958}
   - component: {fileID: 4411000832820291957}
+  - component: {fileID: 4411000832820291965}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -27411,6 +27412,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4411000832820291965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411000832820291956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb92aaca011d1e488a1c15fbc0b07dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textFile: {fileID: 4900000, guid: 0538549a38fd4c14ca783179fcdb951b, type: 3}
+  _items: []
+  _lines: []
+  _itemName: []
+  _itemComponents: []
+  _itemStation: []
+  _itemTier: []
+  _itemType: 
+  _components: []
+  _componentSplit: []
 --- !u!33 &4414785368015874594
 MeshFilter:
   m_ObjectHideFlags: 0

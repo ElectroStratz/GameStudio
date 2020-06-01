@@ -274,3 +274,4 @@ C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\NavMeshComponentsEditor.csproj.CopyComplete
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\NavMeshComponentsEditor.dll
 C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\obj\Debug\NavMeshComponentsEditor.pdb
+C:\Users\elect\Desktop\uma\GD\GameStudio\GameStudio\Locomotion Entertainment\Temp\bin\Debug\ICSharpCode.NRefactory.dll
