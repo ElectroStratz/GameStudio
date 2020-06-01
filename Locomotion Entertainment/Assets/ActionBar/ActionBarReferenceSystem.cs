@@ -74,16 +74,7 @@ public class ActionBarReferenceSystem : MonoBehaviour
     {
         for (int i = 0; i < _Playerinventory.inventorySize; i++)
         {
-            if (_Playerinventory.inventory[i].GetName() == "food")
-            {
-                Sprite icon = _Playerinventory.inventory[i].GetIcon();
-                actionbarSlots[2].AddItem(icon);
-                break;
-            }
-            else
-            {
-                actionbarSlots[0].ClearSlot();
-            }
+
             if (_Playerinventory.inventory[i].GetName() == "Pick Axe")
             {
                 Sprite icon = _Playerinventory.inventory[i].GetIcon();
@@ -104,7 +95,16 @@ public class ActionBarReferenceSystem : MonoBehaviour
             {
                 actionbarSlots[1].ClearSlot();
             }
-
+            if (_Playerinventory.inventory[i].GetName() == "food")
+            {
+                Sprite icon = _Playerinventory.inventory[i].GetIcon();
+                actionbarSlots[2].AddItem(icon);
+                break;
+            }
+            else
+            {
+                actionbarSlots[0].ClearSlot();
+            }
         }
     }
 }

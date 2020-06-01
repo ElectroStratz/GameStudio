@@ -320,12 +320,17 @@ public class PlayerInv : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+            OpenInventory();
         }
         for (int i = 0; i < inventorySize; i++)
         {
             itemNames[i] = inventory[i].GetName();
             itemAmounts[i] = inventory[i].GetAmount();
         }
+    }
+
+    public void OpenInventory()
+    {
+        inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 }
