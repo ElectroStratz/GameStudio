@@ -30755,8 +30755,8 @@ GameObject:
   - component: {fileID: 4411000832820291960}
   - component: {fileID: 4411000832820291959}
   - component: {fileID: 4411000832820291958}
-  - component: {fileID: 4411000832820291957}
   - component: {fileID: 4411000832820291965}
+  - component: {fileID: 4411000832820291957}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager

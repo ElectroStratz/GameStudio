@@ -20,6 +20,7 @@ public class InventoryItem : MonoBehaviour
         this.itemName = item;
         this.itemAmount = amount;
         this.iconItem = icon;
+        print(iconItem.name);
     }
 
     public void AddAmount(float amount)
@@ -48,7 +49,14 @@ public class InventoryItem : MonoBehaviour
         }
 
     }
-
+    private void FindIcon()
+    {
+        //GameObject iconTemp;
+        Sprite icon = Resources.Load<Sprite>("Sprites/Pickaxe");
+        // iconTemp.GetComponent<Image>().sprite = icon[0];
+        //print(icon[0].);
+        this.iconItem = icon;
+    }
     public string GetName()
     {
         return this.itemName;
