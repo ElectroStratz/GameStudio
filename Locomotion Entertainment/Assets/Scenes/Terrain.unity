@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: ebd87e4044d67a94495af89727810613, type: 2}
 --- !u!1 &1480912
 GameObject:
   m_ObjectHideFlags: 0
@@ -21518,7 +21518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceName: Iron
-  _icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  _icon: {fileID: 21300000, guid: 4739fb223360a0d4a8eadf8d6cc65964, type: 3}
   _resourceAmount: 10
   _resourceSize: 10
   _refillTime: 1
@@ -30755,8 +30755,8 @@ GameObject:
   - component: {fileID: 4411000832820291960}
   - component: {fileID: 4411000832820291959}
   - component: {fileID: 4411000832820291958}
-  - component: {fileID: 4411000832820291965}
   - component: {fileID: 4411000832820291957}
+  - component: {fileID: 4411000832820291965}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -30776,6 +30776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57a517ece17ea429cd9d78f0dd8c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _items: {fileID: 0}
 --- !u!114 &4411000832820291958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30899,6 +30900,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textFile: {fileID: 4900000, guid: 0538549a38fd4c14ca783179fcdb951b, type: 3}
+  _sprites:
+  - {fileID: 21300000, guid: 4739fb223360a0d4a8eadf8d6cc65964, type: 3}
+  _objects: []
   _items: []
   _lines: []
   _itemName: []
@@ -43945,7 +43949,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.01, y: 0.83, z: 0.565}
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

@@ -9,6 +9,8 @@ public class ItemList : MonoBehaviour
 {
     [SerializeField]
     public TextAsset _textFile;
+    public List<Sprite> _sprites;
+    public List<GameObject> _objects;
     public List<ItemInfo> _items;
 
 
@@ -25,13 +27,16 @@ public class ItemList : MonoBehaviour
     public string[] _componentSplit;
 
     private int _id;
-    
+    private StartingItems _startItem;
+
     // Start is called before the first frame update
     void Start()
     {
         _items = new List<ItemInfo>();
+        _startItem = GetComponent<StartingItems>();
         _componentList = new List<(string, int)>();
         ReadTextFile();
+        _startItem.StartItems();
     }
 
     private void ReadTextFile()
@@ -60,17 +65,17 @@ public class ItemList : MonoBehaviour
             {
                 if (_itemType == "Material")
                 {
-                    Sprite icon = FindIcon();
+                    Sprite icon = FindIcon(_itemName[0]);
                     
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], null, _componentList));
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, null, _componentList));
                 }
                 else
                 {
-                    Sprite _icon = FindIcon();
+                    Sprite icon = FindIcon(_itemName[0]);
 
-                    GameObject _object = getObject(); 
+                    GameObject _object = GetObject(_itemName[0]); 
 
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], _object, _componentList));
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, _object, _componentList));
                 }
                 
 
@@ -81,35 +86,38 @@ public class ItemList : MonoBehaviour
         
     }
 
-    private Sprite FindIcon()
+    private Sprite FindIcon(string name)
     {
-        //GameObject iconTemp;
-        Sprite[] icon = Resources.LoadAll<Sprite> ("Sprites");
-        // iconTemp.GetComponent<Image>().sprite = icon[0];
-        //print(icon[0].);
-        return icon[0] ;
+        Sprite icon = null;
+
+        foreach (Sprite sprite in _sprites)
+        {
+            if(sprite.name == name)
+            {
+                icon = Instantiate(sprite);
+                break;
+            }
+        }
+        return icon;
     }
 
-    private GameObject getObject()
+    private GameObject GetObject(string name)
     {
         GameObject _object = null;
 
         return _object;
     }
 
-    public Sprite getIcon(string name)
+    public Sprite GetIcon(string name)
     {
         Sprite icon = null;
-
         foreach(ItemInfo item in _items)
         {
             if(item.GetName() == name)
             {
                 icon = item.GetIcon();
-                break;
             }
         }
-        print("getIcon" + icon);
 
         return icon;
     }

@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class StartingItems : MonoBehaviour
 {
+    [SerializeField]
     ItemList _items;
     PlayerInv _Playerinventory;
+
+    private void Awake()
+    {
+        _items = GetComponent<ItemList>();
+        _Playerinventory = GetComponent<PlayerInv>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        _items = GetComponent < ItemList >();
-        _Playerinventory = GetComponent<PlayerInv>();
-        StartItems();
+        
+        //StartItems();
 
     }
     public void StartItems()
     {
-        _Playerinventory.AddToInventory("Pickaxe", 1, null);
+        Sprite icon = _items.GetIcon("Pickaxe");
+        _Playerinventory.AddToInventory("Pickaxe", 1, icon);
         _Playerinventory.AddToInventory("Shovel", 1, null);
-        _Playerinventory.onItemUpdatedCallback();
     }
 
 }
