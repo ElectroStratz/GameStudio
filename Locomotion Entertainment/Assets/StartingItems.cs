@@ -16,8 +16,9 @@ public class StartingItems : MonoBehaviour
     }
     public void StartItems()
     {
-        _Playerinventory.AddToInventory("Pickaxe", 1, _items.getIcon("Pickaxe.png"));
+        _Playerinventory.AddToInventory("Pickaxe", 1, null);
         _Playerinventory.AddToInventory("Shovel", 1, null);
+        _Playerinventory.onItemUpdatedCallback();
     }
 
 }

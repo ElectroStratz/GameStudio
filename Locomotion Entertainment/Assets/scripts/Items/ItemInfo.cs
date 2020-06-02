@@ -14,14 +14,14 @@ public class ItemInfo : MonoBehaviour
 
     private List<(string, int)> _components; //
     
-    public ItemInfo(int id, string name, string type, string station, string tier, Sprite icon, GameObject _object, List<(string, int)> components)
+    public ItemInfo(int id, string name, string type, string station, string tier,  GameObject _object, List<(string, int)> components)
     {
         this._id = id;
         this._name = name;
         this._type = type;
         this._station = station;
         this._tier = tier;
-        this._icon = icon;
+        //this._icon = icon;
         this._object = _object;
         this._components = components;
     }

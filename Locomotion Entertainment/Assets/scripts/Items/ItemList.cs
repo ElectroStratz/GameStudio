@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 
@@ -46,28 +47,30 @@ public class ItemList : MonoBehaviour
             _itemType = _itemTier[1];
 
             _components = _itemComponents[0].Split('+');
-            for(int i = 0; i < _components.Length; i++)
+            if (_itemComponents[0] != "" )
             {
-                _componentSplit = _components[i].Split('x');
-                int amount = int.Parse(_componentSplit[0]);
-                _componentList.Add((_componentSplit[1],amount));
+                for (int i = 0; i < _components.Length; i++)
+                {
+                    _componentSplit = _components[i].Split('x');
+                    int amount = int.Parse(_componentSplit[0]);
+                    _componentList.Add((_componentSplit[1], amount));
+                }
             }
-
             if(_itemName[0] != "")
             {
-                if(_itemType == "Material")
+                if (_itemType == "Material")
                 {
-                    Sprite icon = getIcon();
-
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, null, _componentList));
+                    Sprite icon = FindIcon();
+                    
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], null, _componentList));
                 }
                 else
                 {
-                    Sprite _icon = getIcon();
+                    Sprite _icon = FindIcon();
 
                     GameObject _object = getObject(); 
 
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], _icon, _object, _componentList));
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], _object, _componentList));
                 }
                 
 
@@ -78,12 +81,13 @@ public class ItemList : MonoBehaviour
         
     }
 
-    private Sprite getIcon()
+    private Sprite FindIcon()
     {
-        Sprite icon = null;
-
-        icon = Resources.Load<Sprite>("Pickaxe");
-        return icon;
+        //GameObject iconTemp;
+        Sprite[] icon = Resources.LoadAll<Sprite> ("Sprites");
+        // iconTemp.GetComponent<Image>().sprite = icon[0];
+        //print(icon[0].);
+        return icon[0] ;
     }
 
     private GameObject getObject()
@@ -105,6 +109,7 @@ public class ItemList : MonoBehaviour
                 break;
             }
         }
+        print("getIcon" + icon);
 
         return icon;
     }
