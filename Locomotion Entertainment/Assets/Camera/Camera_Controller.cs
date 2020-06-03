@@ -24,10 +24,22 @@ public class Camera_Controller : MonoBehaviour
     [SerializeField]
     private float zoomSpeed = 4f;
 
+
+    private BuildSystem builder;
+    public GameObject gameManager;
+
+    void Start()
+    {
+        builder = gameManager.GetComponent<BuildSystem>();
+    }
     void Update()
     {
-        zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+        if(builder.GetIsBuilding() == false)
+        {
+            zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+        }
+
     }
     void LateUpdate()
     {
