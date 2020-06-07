@@ -39,7 +39,7 @@ public class PlayerInv : MonoBehaviour
 
     }
     
-    public void AddToInventory(string item, float amount, Sprite icon)
+    public void AddToInventory(string item, int amount, Sprite icon)
     {
         bool inInventory = false;
         List<int> positions = new List<int>();
@@ -281,33 +281,6 @@ public class PlayerInv : MonoBehaviour
             }
             
         }
-
-        //switch (itemStatus)
-        //{
-        //    case 0: //not enough quantity
-        //        return false;
-        //    case 1: //item was removed from inventory
-        //        emptySlots++;
-        //        if (onItemChangedCallback != null)
-        //        {
-        //            onItemChangedCallback.Invoke();
-        //        }
-        //        if (onItemUpdatedCallback != null)
-        //        {
-        //            onItemUpdatedCallback.Invoke();
-        //        }
-        //        return true;
-        //    case 2: //item still exists in inventory
-        //        if (onItemChangedCallback != null)
-        //        {
-        //            onItemChangedCallback.Invoke();
-        //        }
-        //        if (onItemUpdatedCallback != null)
-        //        {
-        //            onItemUpdatedCallback.Invoke();
-        //        }
-        //        return true;
-        //}
 
         return false;
     }

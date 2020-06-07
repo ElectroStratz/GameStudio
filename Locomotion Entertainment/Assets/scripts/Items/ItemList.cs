@@ -14,14 +14,14 @@ public class ItemList : MonoBehaviour
     public List<ItemInfo> _items;
 
 
-    public List<(string, int)> _componentList;
+    public List<ItemComponent> _componentList;
 
     public string[] _lines;
     public string[] _itemName;
     public string[] _itemComponents;
     public string[] _itemStation;
     public string[] _itemTier;
-    public string   _itemType;
+    public string _itemType;
 
     public string[] _components;
     public string[] _componentSplit;
@@ -34,7 +34,7 @@ public class ItemList : MonoBehaviour
     {
         _items = new List<ItemInfo>();
         _startItem = GetComponent<StartingItems>();
-        _componentList = new List<(string, int)>();
+        _componentList = new List<ItemComponent>();
         ReadTextFile();
         _startItem.StartItems();
     }
@@ -43,48 +43,56 @@ public class ItemList : MonoBehaviour
     {
         _lines = _textFile.text.Split('\n');
 
-        foreach(string line in _lines)
+        for(int k = 0; k<_lines.Length;k++)
         {
-            _itemName = line.Split('=');
+            string line = _lines[k];
+           _itemName = line.Split('=');
             _itemComponents = _itemName[1].Split('/');
             _itemStation = _itemComponents[1].Split(',');
             _itemTier = _itemStation[1].Split('-');
             _itemType = _itemTier[1];
 
             _components = _itemComponents[0].Split('+');
-            if (_itemComponents[0] != "" )
+            print(_itemType);
+
+            if (_itemComponents[0] != "")
             {
                 for (int i = 0; i < _components.Length; i++)
                 {
                     _componentSplit = _components[i].Split('x');
                     int amount = int.Parse(_componentSplit[0]);
-                    _componentList.Add((_componentSplit[1], amount));
+                    _componentList.Add(new ItemComponent(_componentSplit[1], amount));
+
                 }
             }
-            if(_itemName[0] != "")
+            print(_itemType.Trim().Equals("Material"));
+            if (_itemName[0] != "")
             {
-                if (_itemType == "Material")
+                if (_itemType.Trim().Equals("Material"))
                 {
                     Sprite icon = FindIcon(_itemName[0]);
-                    
+                    foreach (var component in _componentList)
+                    {
+                        print(component.name);
+                    }
                     _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, null, _componentList));
                 }
                 else
                 {
+                    print("else");
                     Sprite icon = FindIcon(_itemName[0]);
 
-                    GameObject _object = GetObject(_itemName[0]); 
+                    GameObject _object = FindObject(_itemName[0]);
 
                     _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, _object, _componentList));
                 }
-                
-
                 _id++;
                 _componentList.Clear();
             }
         }
-        
+
     }
+    
 
     private Sprite FindIcon(string name)
     {
@@ -101,7 +109,7 @@ public class ItemList : MonoBehaviour
         return icon;
     }
 
-    private GameObject GetObject(string name)
+    private GameObject FindObject(string name)
     {
         GameObject _object = null;
 
@@ -120,5 +128,10 @@ public class ItemList : MonoBehaviour
         }
 
         return icon;
+    }
+
+    public List<ItemInfo> GetList()
+    {
+        return this._items;
     }
 }

@@ -5,16 +5,16 @@ using UnityEngine;
 public class ItemInfo : MonoBehaviour
 {
     private int         _id;
-    private string      _name; //
+    private string      _name; 
     private string      _type;
-    private string      _station; //
+    private string      _station; 
     private Sprite      _icon;
     private GameObject  _object;
-    private string      _tier; //
+    private string      _tier; 
 
-    private List<(string, int)> _components; //
+    public List<ItemComponent> _components; 
     
-    public ItemInfo(int id, string name, string type, string station, string tier, Sprite icon, GameObject _object, List<(string, int)> components)
+    public ItemInfo(int id, string name, string type, string station, string tier, Sprite icon, GameObject _object, List<ItemComponent> components)
     {
         this._id = id;
         this._name = name;
@@ -24,7 +24,8 @@ public class ItemInfo : MonoBehaviour
         this._icon = icon;
         this._object = _object;
         this._components = components;
-        print(icon.name);
+
+        
     }
 
     public Sprite GetIcon()
@@ -35,5 +36,15 @@ public class ItemInfo : MonoBehaviour
     public string GetName()
     {
         return this._name;
+    }
+
+    public string GetStation()
+    {
+        return this._station;
+    }
+
+    public List<ItemComponent> GetComponentsList()
+    {
+        return this._components;
     }
 }

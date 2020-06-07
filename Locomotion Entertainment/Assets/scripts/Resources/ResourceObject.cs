@@ -15,7 +15,7 @@ public class ResourceObject : MonoBehaviour
     [SerializeField]
     protected Sprite _icon;
     [SerializeField]
-    protected float _resourceAmount;
+    protected int _resourceAmount;
     [SerializeField]
     protected float _resourceSize;
     [SerializeField]

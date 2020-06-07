@@ -5,17 +5,23 @@ using UnityEngine;
 public class CraftRecipe : MonoBehaviour
 {
     private string product;
-    private List<(string,int)> components;
+    public List<ItemComponent> components;
 
-    // Start is called before the first frame update
-    void Start()
+    public CraftRecipe(string product, List<ItemComponent> components)
     {
+        this.product = product;
+        this.components = components;
+        
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public string GetProduct()
     {
-        
+        return this.product;
+    }
+
+    public List<ItemComponent> GetRecipeComponents()
+    {
+        return this.components;
     }
 }
