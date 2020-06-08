@@ -10,6 +10,7 @@ public class PlayerInv : MonoBehaviour
     [SerializeField]
     public int maxStack;
     private int emptySlots;
+    public GameObject inventoryUI;
     public GameObject inventoryPanel;
     public GameObject inventorySlot;
     public delegate void OnItemChanged();
@@ -304,6 +305,6 @@ public class PlayerInv : MonoBehaviour
 
     public void OpenInventory()
     {
-        inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 }
