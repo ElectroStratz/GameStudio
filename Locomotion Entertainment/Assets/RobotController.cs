@@ -11,9 +11,13 @@ public class RobotController : MonoBehaviour
     [SerializeField]
     private float distance = 2f;
     NavMeshAgent robotAgent;
+    GameObject manager;
+    RobotInv _robotInv;
     void Start()
     {
         robotAgent = GetComponent<NavMeshAgent>();
+        manager = GameObject.FindGameObjectWithTag("GameManager");
+        _robotInv = manager.GetComponent<RobotInv>();
     }
 
     // Update is called once per frame
@@ -21,5 +25,10 @@ public class RobotController : MonoBehaviour
     {
         robotAgent.SetDestination(targetPlayer.position);
         robotAgent.stoppingDistance = distance;
+    }
+
+    void OnMouseDown()
+    {
+        _robotInv.OpenInventory();
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - BuildingBlock
   - Planter
   - Refinery
+  - Robot
   layers:
   - Default
   - TransparentFX

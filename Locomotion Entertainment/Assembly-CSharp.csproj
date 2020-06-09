@@ -68,6 +68,7 @@
      <Compile Include="Assets\Refinery_Listener.cs" />
      <Compile Include="Assets\Refinery_System.cs" />
      <Compile Include="Assets\RobotController.cs" />
+     <Compile Include="Assets\RobotInv.cs" />
      <Compile Include="Assets\StartingItems.cs" />
      <Compile Include="Assets\TabletSystem.cs" />
      <Compile Include="Assets\scripts\BuildSystem.cs" />

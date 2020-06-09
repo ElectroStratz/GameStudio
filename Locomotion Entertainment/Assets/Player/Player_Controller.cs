@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Player_Controller : MonoBehaviour
 {
+    RobotInv _robotInv;
+
     Camera cameraMain;
     NavMeshAgent player;
     Vector3 direction;
@@ -17,9 +19,12 @@ public class Player_Controller : MonoBehaviour
     private bool hit = false;
     private string objectTag;
 
+    public static bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        _robotInv = gameManager.GetComponent<RobotInv>();
         builder = gameManager.GetComponent<BuildSystem>();
         cameraMain = Camera.main;
         player = GetComponent<NavMeshAgent>();
@@ -41,7 +46,7 @@ public class Player_Controller : MonoBehaviour
             transform.LookAt(direction);
         }
         
-       if (builder.GetIsBuilding() == false)
+       if (canMove)
         {
             objectTag = hitZone.collider.tag;
 
@@ -66,6 +71,14 @@ public class Player_Controller : MonoBehaviour
                                 player.SetDestination(hitZone.point);
                             }
                             break;
+                        case "Robot":
+                            {
+                                if (Vector3.Distance(player.transform.position, hitZone.point) > 1)
+                                {
+                                    player.SetDestination(hitZone.point);
+                                }
+                                break;
+                            }
                     }
 
                     

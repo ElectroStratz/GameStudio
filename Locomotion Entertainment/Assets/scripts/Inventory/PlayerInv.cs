@@ -306,5 +306,6 @@ public class PlayerInv : MonoBehaviour
     public void OpenInventory()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
+        Player_Controller.canMove = !Player_Controller.canMove;
     }
 }

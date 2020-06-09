@@ -19,7 +19,9 @@ public class BuildSystem : MonoBehaviour
 
     PlayerInv inventory;
     private bool isAllowed;
+    Ray ray;
 
+    RaycastHit hitInfo;
 
     private void Awake()
     {
@@ -32,10 +34,11 @@ public class BuildSystem : MonoBehaviour
 
     private void Update()
     {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         HandleNewObjectHotkey();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isBuilding = false;
+            Player_Controller.canMove = true;
         }
         if (currentPlaceableObject != null)
         {
@@ -55,7 +58,7 @@ public class BuildSystem : MonoBehaviour
             }
             else
             {
-                isBuilding = true;
+                Player_Controller.canMove = false;
                 currentPlaceableObject = Instantiate(buildingBlock);
             }
         }
@@ -65,13 +68,11 @@ public class BuildSystem : MonoBehaviour
 
     private void MoveCurrentObjectToMouse()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo))
         {
             currentPlaceableObject.transform.position = hitInfo.point + Vector3.up * 1f;
             currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+
         }
     }
 
@@ -87,6 +88,7 @@ public class BuildSystem : MonoBehaviour
         {
             currentPlaceableObject = null;
         }
+           
     }
    public bool GetIsBuilding()
     {

@@ -10,6 +10,7 @@ public class PlantingSystem : MonoBehaviour
     private GameObject player;
     public GrowSystem growthScript;
     public bool isOccupied = false;
+    public float range = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,5 +43,11 @@ public class PlantingSystem : MonoBehaviour
 
         }
 
+    }
+
+   void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }
