@@ -35395,7 +35395,6 @@ GameObject:
   - component: {fileID: 1685111720}
   - component: {fileID: 1685111723}
   - component: {fileID: 1685111722}
-  - component: {fileID: 1685111721}
   m_Layer: 0
   m_Name: Smelter
   m_TagString: Untagged
@@ -35423,19 +35422,6 @@ Transform:
   m_Father: {fileID: 5006512736357014312}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1685111721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1685111719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 414e62b1be982eb47a463cc86f998dd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _recipes: []
 --- !u!65 &1685111722
 BoxCollider:
   m_ObjectHideFlags: 0

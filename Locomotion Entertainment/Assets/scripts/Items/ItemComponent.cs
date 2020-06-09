@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ItemComponent : MonoBehaviour
 {
-    public string name;
+    public string compname;
     public int amount;
 
     public ItemComponent(string name, int amount)
     {
-        this.name = name;
+        this.compname = name;
         this.amount = amount;
     }
+    
 }

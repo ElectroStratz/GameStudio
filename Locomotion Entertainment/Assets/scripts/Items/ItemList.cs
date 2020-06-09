@@ -26,7 +26,7 @@ public class ItemList : MonoBehaviour
     public string[] _components;
     public string[] _componentSplit;
 
-    private int _id;
+    private int _id = 0;
     private StartingItems _startItem;
 
     // Start is called before the first frame update
@@ -53,44 +53,38 @@ public class ItemList : MonoBehaviour
             _itemType = _itemTier[1];
 
             _components = _itemComponents[0].Split('+');
-            print(_itemType);
 
-            if (_itemComponents[0] != "")
-            {
-                for (int i = 0; i < _components.Length; i++)
-                {
-                    _componentSplit = _components[i].Split('x');
-                    int amount = int.Parse(_componentSplit[0]);
-                    _componentList.Add(new ItemComponent(_componentSplit[1], amount));
-
-                }
-            }
-            print(_itemType.Trim().Equals("Material"));
+            
             if (_itemName[0] != "")
             {
                 if (_itemType.Trim().Equals("Material"))
                 {
                     Sprite icon = FindIcon(_itemName[0]);
-                    foreach (var component in _componentList)
-                    {
-                        print(component.name);
-                    }
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, null, _componentList));
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, null));
                 }
                 else
                 {
-                    print("else");
                     Sprite icon = FindIcon(_itemName[0]);
 
                     GameObject _object = FindObject(_itemName[0]);
 
-                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, _object, _componentList));
+                    _items.Add(new ItemInfo(_id, _itemName[0], _itemType, _itemStation[0], _itemTier[0], icon, _object));
                 }
+                
+                if (_itemComponents[0] != "")
+                {
+                    for (int i = 0; i < _components.Length; i++)
+                    {
+                        _componentSplit = _components[i].Split('X');
+                        int amount = int.Parse(_componentSplit[0].Trim());
+                        _items[_id].AddComponent(_componentSplit[1], amount);
+                    }
+                }
+                
                 _id++;
                 _componentList.Clear();
             }
         }
-
     }
     
 

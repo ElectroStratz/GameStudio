@@ -28,21 +28,13 @@ public class Smelter : MonoBehaviour
 
     public void GetRecipes()
     {
-        List<ItemInfo> items = new List<ItemInfo>();
-        items = _itemList._items;
-        print(items.Count);
+        var items = new List<ItemInfo>(_itemList._items);
+        
+
         for (int i = 0; i < items.Count; i++)
         {
             if(items[i].GetStation() == "Smelter")
             {
-                
-                foreach (var component in items[i]._components)
-                {
-                    
-                    print("component name:" +component.name + " amount:" +component.amount);
-                }
-                
-                
                 _recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
         }
@@ -62,9 +54,9 @@ public class Smelter : MonoBehaviour
         print("item2:"+recipeComponents[0].amount);
         foreach (var item in recipeComponents)
         {
-            print("component name:" + item.name);
+            print("component name:" + item.compname);
             print("component amount:" + item.amount);
-            if (_inventory.GetItemAmount(item.name) >= item.amount)
+            if (_inventory.GetItemAmount(item.compname) >= item.amount)
             {
                 isPossible = true;
             }
@@ -79,7 +71,7 @@ public class Smelter : MonoBehaviour
         {
             foreach (var item in recipeComponents)
             {
-                _inventory.RemoveFromInventory(item.name,item.amount);
+                _inventory.RemoveFromInventory(item.compname,item.amount);
             }
 
             _inventory.AddToInventory(product, 1, _itemList.GetIcon(product));

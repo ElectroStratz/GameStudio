@@ -14,18 +14,21 @@ public class ItemInfo : MonoBehaviour
 
     public List<ItemComponent> _components; 
     
-    public ItemInfo(int id, string name, string type, string station, string tier, Sprite icon, GameObject _object, List<ItemComponent> components)
+    public ItemInfo(int id, string itemname, string type, string station, string tier, Sprite icon, GameObject _object)
     {
+        _components = new List<ItemComponent>();
         this._id = id;
-        this._name = name;
+        this._name = itemname;
         this._type = type;
         this._station = station;
         this._tier = tier;
         this._icon = icon;
         this._object = _object;
-        this._components = components;
+    }
 
-        
+    public void AddComponent(string compName, int amount)
+    {
+        _components.Add(new ItemComponent(compName, amount));
     }
 
     public Sprite GetIcon()
@@ -41,6 +44,11 @@ public class ItemInfo : MonoBehaviour
     public string GetStation()
     {
         return this._station;
+    }
+
+    public string GetTier()
+    {
+        return this._tier;
     }
 
     public List<ItemComponent> GetComponentsList()
