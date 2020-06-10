@@ -50,7 +50,11 @@ public class ItemInfo : MonoBehaviour
     {
         return this._tier;
     }
-
+    
+    public GameObject GetObject()
+    {
+        return this._object;
+    }
     public List<ItemComponent> GetComponentsList()
     {
         return this._components;

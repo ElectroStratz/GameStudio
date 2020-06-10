@@ -6,7 +6,8 @@ public class GrowSystem : MonoBehaviour
 {
     private PlayerInv inventory;
     private GameObject manager;
-
+    private GameObject _player;
+    private Animator _playeranimator;
     public static GrowSystem instance;
     private float growth;
     public PlantingSystem plantingScript;
@@ -18,6 +19,8 @@ public class GrowSystem : MonoBehaviour
     {
         instance = this;
         manager = GameObject.FindGameObjectWithTag("GameManager");
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playeranimator = _player.GetComponentInChildren<Animator>();
         inventory = manager.GetComponent<PlayerInv>();
         if (isPlanted)
         {
@@ -44,6 +47,7 @@ public class GrowSystem : MonoBehaviour
     {
         if (growth == 5)
         {
+            _playeranimator.SetTrigger("Pick");
             plantingScript.isOccupied = false;
             Destroy(gameObject);
             inventory.AddToInventory("food", 3, null);

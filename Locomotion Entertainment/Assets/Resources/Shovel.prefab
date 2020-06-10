@@ -137,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 6385932361369672534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.985, y: 1.421, z: -3.728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.6084, y: 6.6084, z: 6.6084}
   m_Children:
   - {fileID: 7074046988183110922}
   m_Father: {fileID: 0}
@@ -155,15 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a1a9deb36aadf4da87914adc0465a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceName: 
-  _icon: {fileID: 0}
-  _resourceAmmount: 0
-  _craftItem: 0
-  _equipableItem: 0
-  _levelItem: 0
-  _objectItem: {fileID: 0}
   equippedItem: 0
-  rotationItem: {x: 79.105, y: 115.716, z: 74.911}
+  rotationItem: {x: 74.167, y: 164.192, z: 67.69}
 --- !u!1 &7679997937428816506
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class ResourceObject : MonoBehaviour
     //world information
     protected GameObject _manager;
     protected GameObject _player;
+    protected Animator _playeranimator;
     protected PlayerInv _inventory;
 
     //resource information
@@ -31,6 +32,7 @@ public class ResourceObject : MonoBehaviour
     {
         _manager = GameObject.FindGameObjectWithTag("GameManager");
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playeranimator = _player.GetComponentInChildren<Animator>();
         _inventory = _manager.GetComponent<PlayerInv>();
         _particleSys = GetComponent<ParticleSystem>();
 
@@ -45,6 +47,7 @@ public class ResourceObject : MonoBehaviour
             if (!isDepleted && _currentResources > 0)
             {
                 _particleSys.Play();
+                _playeranimator.SetTrigger("Mining");
                 _inventory.AddToInventory(_resourceName, _resourceAmount, _icon);
                 _currentResources--;
                 this.transform.localScale = new Vector3(transform.localScale.x - 0.05f, transform.localScale.y - 0.05f, transform.localScale.z - 0.05f);

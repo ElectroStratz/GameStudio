@@ -8,6 +8,7 @@ public class PlantingSystem : MonoBehaviour
     [SerializeField]
     private GameObject seedPrefab;
     private GameObject player;
+    private Animator _playeranimator;
     public GrowSystem growthScript;
     public bool isOccupied = false;
     public float range = 5f;
@@ -16,6 +17,7 @@ public class PlantingSystem : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
+        _playeranimator = player.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class PlantingSystem : MonoBehaviour
             }
             else
             {
+                _playeranimator.SetTrigger("Planting");
                 GameObject seedTemp = Instantiate(seedPrefab, transform.position, transform.rotation);
                 seedTemp.transform.parent = gameObject.transform;
                 isOccupied = true;

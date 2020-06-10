@@ -26,6 +26,10 @@ public class StartingItems : MonoBehaviour
         Sprite icon = _items.GetIcon("Pickaxe");
         _Playerinventory.AddToInventory("Pickaxe", 1, icon);
         _Playerinventory.AddToInventory("Shovel", 1, null);
+
+        Sprite icon2 = _items.GetIcon("Pickaxe");
+        _Playerinventory.AddToInventory("Pickaxe", 1, icon2);
+        _Playerinventory.AddToInventory("Shovel", 1, null);
     }
 
 }
