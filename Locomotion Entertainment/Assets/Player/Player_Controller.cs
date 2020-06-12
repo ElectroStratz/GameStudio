@@ -20,8 +20,8 @@ public class Player_Controller : MonoBehaviour
     private string objectTag;
 
     public static bool canMove = true;
+    public GameObject ItemHolder;
 
-    // Start is called before the first frame update
     void Start()
     {
         _robotInv = gameManager.GetComponent<RobotInv>();

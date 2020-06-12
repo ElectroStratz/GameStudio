@@ -12,17 +12,25 @@ public class ActionBarReferenceSystem : MonoBehaviour
     public GameObject actionbarSlot;
     
     ActionBarSlotSystem[] actionbarSlots;
-    GameObject _player;
-    GameObject objectPickaxe, objectShovel;
+   
+    Player_Controller _playerController;
+    GameObject itemObject;
     Color selected, normal;
+
     PlayerInv _Playerinventory;
+    ItemList _itemList;
+    GameObject _player;
+    GameObject _manager;
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _manager = GameObject.FindGameObjectWithTag("GameManager");
+        _playerController = _player.GetComponent<Player_Controller>();
+        _itemList = _manager.GetComponent<ItemList>();
+        _Playerinventory = GetComponent<PlayerInv>();
         normal = Color.white;
         selected = new Color (00, 0.5986471f, 1, 1);
-        _Playerinventory = GetComponent<PlayerInv>();
         _Playerinventory.onItemUpdatedCallback += UpdateUI;
         
         
@@ -76,43 +84,39 @@ public class ActionBarReferenceSystem : MonoBehaviour
         buttoncolortemp.normalColor = selected;
         buttontemp.colors = buttoncolortemp;
     }
-    void SelectedObject(int i)
+    void SelectedObject(int keypressed)
     {
-        if (i == 0)
+        var items = new List<ItemInfo>(_itemList._items);
+        if (keypressed == 0)
         {
             for (int k = 0; k < _Playerinventory.inventorySize; k++)
             {
-                
                 if (_Playerinventory.inventory[k].GetName() == "Pickaxe")
                 {
-                    print("encontrei");
-                    objectPickaxe = _player.transform.Find("PlayerGraphic").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("Armature").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:Hips").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:Spine").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:Spine1").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:Spine2").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:RightShoulder").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:RightArm").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:RightForeArm").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("mixamorig:RightHand").gameObject;
-                    objectPickaxe = objectPickaxe.transform.Find("Pickaxe").gameObject;
-                    objectPickaxe.gameObject.SetActive(true);
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].GetName() == "Pickaxe")
+                        {
+                            itemObject = items[i].GetObject();
+                            print(itemObject.name);
+                            break;
+                        }
+                    }
                 }
             }
         }
         else
         {
-            objectPickaxe.gameObject.SetActive(false);
+            itemObject.gameObject.SetActive(false);
         }
-        if(i == 1)
+        if(keypressed == 1)
         {
             for (int k = 0; k < _Playerinventory.inventorySize; k++)
             {
 
                 if (_Playerinventory.inventory[k].GetName() == "Shovel")
                 {
-                    print("encontrei");
+                    /*print("encontrei");
                     objectShovel = _player.transform.Find("PlayerGraphic").gameObject;
                     objectShovel = objectShovel.transform.Find("Armature").gameObject;
                     objectShovel = objectShovel.transform.Find("mixamorig:Hips").gameObject;
@@ -124,13 +128,13 @@ public class ActionBarReferenceSystem : MonoBehaviour
                     objectShovel = objectShovel.transform.Find("mixamorig:RightForeArm").gameObject;
                     objectShovel = objectShovel.transform.Find("mixamorig:RightHand").gameObject;
                     objectShovel = objectShovel.transform.Find("Shovel").gameObject;
-                    objectShovel.gameObject.SetActive(true);
+                    objectShovel.gameObject.SetActive(true);*/
                 }
             }
         }
         else
         {
-            objectShovel.gameObject.SetActive(false);
+            itemObject.gameObject.SetActive(false);
         }
     }
     void UpdateUI()

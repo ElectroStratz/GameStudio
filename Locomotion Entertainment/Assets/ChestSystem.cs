@@ -9,12 +9,17 @@ public class ChestSystem : MonoBehaviour
     private bool isOpen;
 
     [SerializeField]
-    private GameObject chestPanel;
+    private GameObject chestUI;
+
+
+    protected PlayerInv _Playerinventory;
+    protected GameObject _manager;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        chestPanel.SetActive(false);
+        _manager = GameObject.FindGameObjectWithTag("GameManager");
+        _Playerinventory = _manager.GetComponent<PlayerInv>();
     }
 
     // Update is called once per frame
@@ -30,11 +35,11 @@ public class ChestSystem : MonoBehaviour
         {
             if (isOpen)
             {
-                chestPanel.SetActive(true);
+                chestUI.SetActive(true);
             }
             else
             {
-                chestPanel.SetActive(false);
+                chestUI.SetActive(false);
             }
 
         }
