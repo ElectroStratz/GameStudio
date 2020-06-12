@@ -105,9 +105,16 @@ public class ItemList : MonoBehaviour
 
     private GameObject FindObject(string name)
     {
-        GameObject _object = null;
-
-        return _object;
+        GameObject objects = null;
+        foreach (GameObject objectref in _objects)
+        {
+            if (objectref.name == name)
+            {
+                objects = Instantiate(objectref);
+                break;
+            }
+        }
+        return objects;
     }
 
     public Sprite GetIcon(string name)

@@ -9,7 +9,7 @@ public class ItemScript : MonoBehaviour
     protected PlayerInv _inventory;
     [Header("Default Settings")]
     public bool equippedItem;
-    public Vector3 rotationItem;
+    public Vector3 rotationItem, scaleItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +18,11 @@ public class ItemScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (equippedItem)
         {
             gameObject.transform.localEulerAngles = rotationItem;
+            gameObject.transform.localScale = scaleItem;
         }
 
     }

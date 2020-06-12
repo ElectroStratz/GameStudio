@@ -156,7 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedItem: 0
-  rotationItem: {x: 74.167, y: 164.192, z: 67.69}
+  rotationItem: {x: 63.685, y: 72.317, z: -12.413}
+  scaleItem: {x: 6.5, y: 6.5, z: 6.5}
 --- !u!1 &7679997937428816506
 GameObject:
   m_ObjectHideFlags: 0

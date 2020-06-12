@@ -14,7 +14,7 @@ public class ActionBarReferenceSystem : MonoBehaviour
     ActionBarSlotSystem[] actionbarSlots;
    
     Player_Controller _playerController;
-    GameObject itemObject;
+    GameObject itemObject, previousObject;
     Color selected, normal;
 
     PlayerInv _Playerinventory;
@@ -98,43 +98,50 @@ public class ActionBarReferenceSystem : MonoBehaviour
                         if (items[i].GetName() == "Pickaxe")
                         {
                             itemObject = items[i].GetObject();
-                            print(itemObject.name);
+                            itemObject.GetComponent<ItemScript>().equippedItem = true;
+                            itemObject.transform.parent = _playerController.ItemHolder.transform;
+                            itemObject.transform.position = _playerController.ItemHolder.transform.position;
+                            _playerController.ItemHolder.transform.Find(itemObject +"(Clone)").gameObject.SetActive(true);
+                            previousObject = itemObject;
                             break;
                         }
                     }
+                    break;
                 }
             }
         }
         else
         {
-            itemObject.gameObject.SetActive(false);
+            _playerController.ItemHolder.transform.Find(previousObject + "(Clone)").gameObject.SetActive(false);
         }
         if(keypressed == 1)
         {
+            
             for (int k = 0; k < _Playerinventory.inventorySize; k++)
             {
-
                 if (_Playerinventory.inventory[k].GetName() == "Shovel")
                 {
-                    /*print("encontrei");
-                    objectShovel = _player.transform.Find("PlayerGraphic").gameObject;
-                    objectShovel = objectShovel.transform.Find("Armature").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:Hips").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:Spine").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:Spine1").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:Spine2").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:RightShoulder").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:RightArm").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:RightForeArm").gameObject;
-                    objectShovel = objectShovel.transform.Find("mixamorig:RightHand").gameObject;
-                    objectShovel = objectShovel.transform.Find("Shovel").gameObject;
-                    objectShovel.gameObject.SetActive(true);*/
+                    print("tenho o gajo");
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        if (items[i].GetName() == "Shovel")
+                        {
+                            print("perdi o gajo");
+                            itemObject = items[i].GetObject();
+                            itemObject.GetComponent<ItemScript>().equippedItem = true;
+                            itemObject.transform.parent = _playerController.ItemHolder.transform;
+                            itemObject.transform.position = _playerController.ItemHolder.transform.position;
+                            _playerController.ItemHolder.transform.Find(itemObject.name + "(Clone)").gameObject.SetActive(true);
+                            break;
+                        }
+                    }
+                    break;
                 }
             }
         }
         else
         {
-            itemObject.gameObject.SetActive(false);
+            _playerController.ItemHolder.transform.Find(itemObject.name + "(Clone)").gameObject.SetActive(false);
         }
     }
     void UpdateUI()
