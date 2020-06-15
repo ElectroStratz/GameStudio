@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Smelter : MonoBehaviour
 {
-    public List<CraftRecipe> _recipes;
+    public List<CraftRecipe> recipes;
     private ItemList _itemList;
     private GameObject _manager;
     private PlayerInv _inventory;
+    private CraftRecipe _selectedRecipe;
 
     // Start is called before the first frame update
     void Start()
     {
-        _recipes = new List<CraftRecipe>();
+        recipes = new List<CraftRecipe>();
         _manager = GameObject.FindGameObjectWithTag("GameManager");
         _inventory = _manager.GetComponent<PlayerInv>();
         _itemList = _manager.GetComponent<ItemList>();
@@ -26,7 +27,7 @@ public class Smelter : MonoBehaviour
         GetRecipes();
     }
 
-    public void GetRecipes()
+    private void GetRecipes()
     {
         var items = new List<ItemInfo>(_itemList._items);
         
@@ -35,24 +36,26 @@ public class Smelter : MonoBehaviour
         {
             if(items[i].GetStation() == "Smelter")
             {
-                _recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
+                recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
         }
     }
 
-    private void OnMouseDown()
+    public void SetRecipe(string item)
     {
-        print("smelter mouse down");
-        //Iron Ingot
-        string product = _recipes[0].GetProduct();
-        print(product);
-        //Iron Ore
-        List<ItemComponent> recipeComponents = _recipes[0].components;
+        foreach(CraftRecipe recipe in recipes)
+        {
+            if(recipe.GetProduct() == item)
+            {
+                _selectedRecipe = recipe;
+            }
+        }
+    }
 
+    public void Craft()
+    {
         bool isPossible = false;
-        print("item1:"+recipeComponents.Count);
-        print("item2:"+recipeComponents[0].amount);
-        foreach (var item in recipeComponents)
+        foreach (var item in _selectedRecipe.GetRecipeComponents())
         {
             print("component name:" + item.compname);
             print("component amount:" + item.amount);
@@ -69,14 +72,24 @@ public class Smelter : MonoBehaviour
 
         if (isPossible)
         {
-            foreach (var item in recipeComponents)
+            foreach (var item in _selectedRecipe.GetRecipeComponents())
             {
-                _inventory.RemoveFromInventory(item.compname,item.amount);
+                _inventory.RemoveFromInventory(item.compname, item.amount);
             }
-
-            _inventory.AddToInventory(product, 1, _itemList.GetIcon(product));
+            _inventory.AddToInventory(_selectedRecipe.GetProduct(), 1, _itemList.GetIcon(_selectedRecipe.GetProduct()));
             print("added product to playerinv");
         }
+    }
+
+    private void OnMouseDown()
+    {
+        SetRecipe("Iron Ingot");
+        Craft();
+    }
+
+    public List<CraftRecipe> GetRecipeList()
+    {
+        return this.recipes;
     }
 
 }

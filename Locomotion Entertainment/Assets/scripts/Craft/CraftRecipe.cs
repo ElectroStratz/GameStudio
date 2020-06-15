@@ -5,7 +5,7 @@ using UnityEngine;
 public class CraftRecipe : MonoBehaviour
 {
     private string product;
-    public List<ItemComponent> components;
+    private List<ItemComponent> components;
 
     public CraftRecipe(string product, List<ItemComponent> components)
     {

@@ -8,6 +8,7 @@ public class Workstation : MonoBehaviour
     private ItemList _itemList;
     private GameObject _manager;
     private PlayerInv _inventory;
+    private CraftRecipe _selectedRecipe;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,46 @@ public class Workstation : MonoBehaviour
             {
                 _recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
+        }
+    }
+
+    public void SetRecipe(string item)
+    {
+        foreach (CraftRecipe recipe in _recipes)
+        {
+            if (recipe.GetProduct() == item)
+            {
+                _selectedRecipe = recipe;
+            }
+        }
+    }
+
+    public void Craft()
+    {
+        bool isPossible = false;
+        foreach (var item in _selectedRecipe.GetRecipeComponents())
+        {
+            print("component name:" + item.compname);
+            print("component amount:" + item.amount);
+            if (_inventory.GetItemAmount(item.compname) >= item.amount)
+            {
+                isPossible = true;
+            }
+            else
+            {
+                isPossible = false;
+                break;
+            }
+        }
+
+        if (isPossible)
+        {
+            foreach (var item in _selectedRecipe.GetRecipeComponents())
+            {
+                _inventory.RemoveFromInventory(item.compname, item.amount);
+            }
+            _inventory.AddToInventory(_selectedRecipe.GetProduct(), 1, _itemList.GetIcon(_selectedRecipe.GetProduct()));
+            print("added product to playerinv");
         }
     }
 }
