@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -45,12 +46,9 @@ public class Player_Controller : MonoBehaviour
         {
             transform.LookAt(direction);
         }
-        
-       if (canMove)
-        {
             objectTag = hitZone.collider.tag;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !isMouseOnUI())
             {
                 if (hit)
                 {
@@ -84,8 +82,7 @@ public class Player_Controller : MonoBehaviour
                     
                 }
             }
-        }
-        
+
         /*
         float translation = Input.GetAxis("Vertical") * speed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
@@ -101,5 +98,9 @@ public class Player_Controller : MonoBehaviour
 
         // Rotate around our y-axis
         transform.Rotate(0, rotation, 0);*/
+    }
+    public bool isMouseOnUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

@@ -302,6 +302,5 @@ public class RobotInv : MonoBehaviour
         public void OpenInventory()
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
-            Player_Controller.canMove = !Player_Controller.canMove;
         }
     }

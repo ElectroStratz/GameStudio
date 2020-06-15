@@ -89,6 +89,10 @@ public class ActionBarReferenceSystem : MonoBehaviour
         var items = new List<ItemInfo>(_itemList._items);
         if (keypressed == 0)
         {
+            foreach (Transform child in _playerController.ItemHolder.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
             for (int k = 0; k < _Playerinventory.inventorySize; k++)
             {
                 if (_Playerinventory.inventory[k].GetName() == "Pickaxe")
@@ -101,8 +105,7 @@ public class ActionBarReferenceSystem : MonoBehaviour
                             itemObject.GetComponent<ItemScript>().equippedItem = true;
                             itemObject.transform.parent = _playerController.ItemHolder.transform;
                             itemObject.transform.position = _playerController.ItemHolder.transform.position;
-                            _playerController.ItemHolder.transform.Find(itemObject +"(Clone)").gameObject.SetActive(true);
-                            previousObject = itemObject;
+                            itemObject.SetActive(true);
                             break;
                         }
                     }
@@ -110,38 +113,31 @@ public class ActionBarReferenceSystem : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            _playerController.ItemHolder.transform.Find(previousObject + "(Clone)").gameObject.SetActive(false);
-        }
         if(keypressed == 1)
         {
-            
+            foreach (Transform child in _playerController.ItemHolder.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
             for (int k = 0; k < _Playerinventory.inventorySize; k++)
             {
                 if (_Playerinventory.inventory[k].GetName() == "Shovel")
                 {
-                    print("tenho o gajo");
                     for (int i = 0; i < items.Count; i++)
                     {
                         if (items[i].GetName() == "Shovel")
                         {
-                            print("perdi o gajo");
                             itemObject = items[i].GetObject();
                             itemObject.GetComponent<ItemScript>().equippedItem = true;
                             itemObject.transform.parent = _playerController.ItemHolder.transform;
                             itemObject.transform.position = _playerController.ItemHolder.transform.position;
-                            _playerController.ItemHolder.transform.Find(itemObject.name + "(Clone)").gameObject.SetActive(true);
+                            itemObject.SetActive(true);
                             break;
                         }
                     }
                     break;
                 }
             }
-        }
-        else
-        {
-            _playerController.ItemHolder.transform.Find(itemObject.name + "(Clone)").gameObject.SetActive(false);
         }
     }
     void UpdateUI()
