@@ -21,6 +21,7 @@ public class ResourceObject : MonoBehaviour
     protected float _resourceSize;
     [SerializeField]
     protected float _refillTime;
+    protected AudioSource _audiosource;
 
     //internal values
     protected float _currentResources;
@@ -35,6 +36,7 @@ public class ResourceObject : MonoBehaviour
         _playeranimator = _player.GetComponentInChildren<Animator>();
         _inventory = _manager.GetComponent<PlayerInv>();
         _particleSys = GetComponent<ParticleSystem>();
+        _audiosource = GetComponent<AudioSource>();
 
         _currentResources = _resourceSize;
         isDepleted = false;
@@ -46,8 +48,8 @@ public class ResourceObject : MonoBehaviour
         {
             if (!isDepleted && _currentResources > 0)
             {
-                _particleSys.Play();
                 _playeranimator.SetTrigger("Mining");
+                StartCoroutine("MiningSound");
                 _inventory.AddToInventory(_resourceName, _resourceAmount, _icon);
                 _currentResources--;
                 this.transform.localScale = new Vector3(transform.localScale.x - 0.05f, transform.localScale.y - 0.05f, transform.localScale.z - 0.05f);
@@ -73,5 +75,12 @@ public class ResourceObject : MonoBehaviour
             }
         }
 
+    }
+
+    private IEnumerator MiningSound()
+    {
+        yield return new WaitForSeconds(0.65f);
+        _audiosource.Play();
+        _particleSys.Play();
     }
 }
