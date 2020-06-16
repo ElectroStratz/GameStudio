@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Smelter : MonoBehaviour
 {
+    public GameObject SmelterPanel;
+    public GameObject CraftSlot;
+    public Button craftButton;
+
     public List<CraftRecipe> recipes;
     private ItemList _itemList;
     private GameObject _manager;
@@ -17,6 +22,7 @@ public class Smelter : MonoBehaviour
         _manager = GameObject.FindGameObjectWithTag("GameManager");
         _inventory = _manager.GetComponent<PlayerInv>();
         _itemList = _manager.GetComponent<ItemList>();
+        craftButton.onClick.AddListener(() => { Craft(); });
 
         StartCoroutine(WaitRecipes());
     }
@@ -39,6 +45,8 @@ public class Smelter : MonoBehaviour
                 recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
         }
+
+        CreateSlots();
     }
 
     public void SetRecipe(string item)
@@ -80,16 +88,25 @@ public class Smelter : MonoBehaviour
             print("added product to playerinv");
         }
     }
+    
 
-    private void OnMouseDown()
+    private void CreateSlots()
     {
-        SetRecipe("Iron Ingot");
-        Craft();
-    }
+        for (int i = 0; i < recipes.Count; i++)
+        {
+            string product = recipes[i].GetProduct();
+            GameObject instance = Instantiate(CraftSlot, SmelterPanel.transform);
+            instance.transform.parent = SmelterPanel.transform;
+            instance.transform.Find("Text").GetComponent<Text>().text = product;
+            instance.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(product);
+            Button buttonEvent = instance.GetComponent<Button>();
+            buttonEvent.onClick.AddListener(() =>
+            {
+                SetRecipe(product);
+            }
+            );
 
-    public List<CraftRecipe> GetRecipeList()
-    {
-        return this.recipes;
-    }
+        }
 
+    }
 }

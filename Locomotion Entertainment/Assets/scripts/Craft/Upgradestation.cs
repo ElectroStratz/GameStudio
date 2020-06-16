@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Upgradestation : MonoBehaviour
 {
+    public GameObject SmelterPanel;
+    public GameObject CraftSlot;
+    public Button craftButton;
+
     public List<CraftRecipe> _recipes;
     private ItemList _itemList;
     private GameObject _manager;
@@ -17,6 +22,7 @@ public class Upgradestation : MonoBehaviour
         _manager = GameObject.FindGameObjectWithTag("GameManager");
         _inventory = _manager.GetComponent<PlayerInv>();
         _itemList = _manager.GetComponent<ItemList>();
+        craftButton.onClick.AddListener(() => { Craft(); });
 
         StartCoroutine(WaitRecipes());
     }
@@ -39,6 +45,8 @@ public class Upgradestation : MonoBehaviour
                 _recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
         }
+
+        CreateSlots();
     }
 
     public void SetRecipe(string item)
@@ -79,5 +87,25 @@ public class Upgradestation : MonoBehaviour
             _inventory.AddToInventory(_selectedRecipe.GetProduct(), 1, _itemList.GetIcon(_selectedRecipe.GetProduct()));
             print("added product to playerinv");
         }
+    }
+
+    private void CreateSlots()
+    {
+        for (int i = 0; i < _recipes.Count; i++)
+        {
+            string product = _recipes[i].GetProduct();
+            GameObject instance = Instantiate(CraftSlot, SmelterPanel.transform);
+            instance.transform.parent = SmelterPanel.transform;
+            instance.transform.Find("Text").GetComponent<Text>().text = product;
+            instance.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(product);
+            Button buttonEvent = instance.GetComponent<Button>();
+            buttonEvent.onClick.AddListener(() =>
+            {
+                SetRecipe(product);
+            }
+            );
+
+        }
+
     }
 }

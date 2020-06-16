@@ -8,9 +8,6 @@ public class CraftlistSmelter : MonoBehaviour
     public GameObject SmelterPanel;
     public GameObject CraftSlot;
     
-
-    Player_Controller _playerController;
-    GameObject itemObject, previousObject;
     Color selected, normal;
 
     private List<CraftRecipe> recipes;
@@ -52,10 +49,18 @@ public class CraftlistSmelter : MonoBehaviour
     {
         for (int i = 0; i < recipes.Count; i++)
         {
-            Instantiate(CraftSlot, SmelterPanel.transform);
-            CraftSlot.transform.parent = SmelterPanel.transform;
-            CraftSlot.transform.Find("Text").GetComponent<Text>().text = recipes[i].GetProduct();
-            CraftSlot.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(recipes[i].GetProduct());
+            string product = recipes[i].GetProduct();
+            GameObject instance = Instantiate(CraftSlot, SmelterPanel.transform);
+            instance.transform.parent = SmelterPanel.transform;
+            instance.transform.Find("Text").GetComponent<Text>().text = product;
+            instance.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(product);
+            Button buttonEvent = instance.GetComponent<Button>();
+            buttonEvent.onClick.AddListener(() =>
+            {
+                Debug.Log(product);
+            }
+            );
+            
         }
         
     }
