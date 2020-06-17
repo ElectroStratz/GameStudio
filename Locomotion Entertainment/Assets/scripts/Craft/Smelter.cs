@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Smelter : MonoBehaviour
 {
@@ -97,7 +98,7 @@ public class Smelter : MonoBehaviour
             string product = recipes[i].GetProduct();
             GameObject instance = Instantiate(CraftSlot, SmelterPanel.transform);
             instance.transform.parent = SmelterPanel.transform;
-            instance.transform.Find("Text").GetComponent<Text>().text = product;
+            instance.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = product;
             instance.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(product);
             Button buttonEvent = instance.GetComponent<Button>();
             buttonEvent.onClick.AddListener(() =>
@@ -108,5 +109,11 @@ public class Smelter : MonoBehaviour
 
         }
 
+    }
+
+    void OnMouseDown()
+    {
+        SmelterPanel.SetActive(true);
+        _inventory.inventoryPanel.SetActive(true);
     }
 }

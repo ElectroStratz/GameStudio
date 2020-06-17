@@ -48,7 +48,7 @@ public class Player_Controller : MonoBehaviour
         }
             objectTag = hitZone.collider.tag;
 
-            if (Input.GetMouseButtonDown(0) && !isMouseOnUI())
+            if (Input.GetMouseButtonDown(0) && !isMouseOnUI() && canMove)
             {
                 if (hit)
                 {

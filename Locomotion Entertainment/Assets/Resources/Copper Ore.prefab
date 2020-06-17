@@ -2005,7 +2005,7 @@ Transform:
   m_GameObject: {fileID: 2556287848373568582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.83, y: 0.6, z: -0.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_Children:
   - {fileID: 642213276812415808}
   - {fileID: 2556287849849305327}
@@ -2043,6 +2043,7 @@ MonoBehaviour:
   _resourceSize: 10
   _refillTime: 1
   hp_ui: {fileID: 2556287848696026222}
+  hpHolder: {fileID: 0}
 --- !u!208 &2556287848373568579
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -2311,7 +2312,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3218,7 +3219,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -6794,7 +6795,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a04a91b1ce447444bb6e0367fcad3f33, type: 2}
+  - {fileID: 2100000, guid: 27aa4d75a37e2224d93c3ffd8671f29e, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -6834,7 +6835,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5495902117074765545, guid: 22068aeda7e762f4a9addb62c00acc28, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
