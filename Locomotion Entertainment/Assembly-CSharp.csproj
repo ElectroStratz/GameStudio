@@ -55,10 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ActionBar\ActionBarItem.cs" />
-     <Compile Include="Assets\ActionBar\ActionBarReferenceSystem.cs" />
-     <Compile Include="Assets\ActionBar\ActionBarSlotSystem.cs" />
-     <Compile Include="Assets\ActionBar\CraftlistSmelter.cs" />
      <Compile Include="Assets\Camera\Camera_Controller.cs" />
      <Compile Include="Assets\ChestSystem.cs" />
      <Compile Include="Assets\DayCycle.cs" />
@@ -72,6 +68,10 @@
      <Compile Include="Assets\RobotInv.cs" />
      <Compile Include="Assets\StartingItems.cs" />
      <Compile Include="Assets\TabletSystem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\ActionBarItem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\ActionBarReferenceSystem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\ActionBarSlotSystem.cs" />
+     <Compile Include="Assets\scripts\ActionBar\CraftlistSmelter.cs" />
      <Compile Include="Assets\scripts\BuildSystem.cs" />
      <Compile Include="Assets\scripts\Craft\CraftRecipe.cs" />
      <Compile Include="Assets\scripts\Craft\Refinery.cs" />

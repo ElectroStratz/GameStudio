@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ChestSystem : MonoBehaviour
 {
     private GameObject player;
-    private bool isOpen;
+    public bool isOpen;
 
     [SerializeField]
     private GameObject chestUI;
@@ -36,10 +36,13 @@ public class ChestSystem : MonoBehaviour
             if (isOpen)
             {
                 chestUI.SetActive(true);
+                _Playerinventory.inventoryUI.SetActive(true);
             }
-            else
+            if(isOpen && chestUI.activeSelf == false)
             {
+                isOpen = false;
                 chestUI.SetActive(false);
+                _Playerinventory.inventoryUI.SetActive(false);
             }
 
         }

@@ -6,6 +6,7 @@ using TMPro;
 
 public class Smelter : MonoBehaviour
 {
+    public GameObject SmelterPanelUI;
     public GameObject SmelterPanel;
     public GameObject CraftSlot;
     public Button craftButton;
@@ -113,7 +114,7 @@ public class Smelter : MonoBehaviour
 
     void OnMouseDown()
     {
-        SmelterPanel.SetActive(true);
-        _inventory.inventoryPanel.SetActive(true);
+        SmelterPanelUI.SetActive(true);
+        _inventory.inventoryUI.SetActive(true);
     }
 }
