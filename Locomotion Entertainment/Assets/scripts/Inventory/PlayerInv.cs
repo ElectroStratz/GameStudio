@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInv : MonoBehaviour
 {
@@ -16,17 +17,37 @@ public class PlayerInv : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-
+    public GameObject DestinationInv;
+    public bool isOpen;
+    public string _selectedItem;
+    
     public delegate void OnItemUpdated();
     public OnItemUpdated onItemUpdatedCallback;
+
     private void Awake()
     {
+        isOpen = false;
 
         for (int i = 0; i < inventorySize; i++)
         {
             inventory.Add(new InventoryItem());
-            Instantiate(inventorySlot, inventoryPanel.transform);
-            inventorySlot.transform.parent = inventoryPanel.transform;
+            var slot = Instantiate(inventorySlot, inventoryPanel.transform);
+            slot.transform.parent = inventoryPanel.transform;
+            Button buttonEvent = slot.GetComponent<Button>();
+            InventorySlotSystem invItem = slot.GetComponent<InventorySlotSystem>();
+            invItem.ClearSlot();
+            buttonEvent.onClick.AddListener(() =>
+            {
+                try
+                {
+                    SelectedItem(invItem.item.GetName());
+                }
+                catch (System.Exception e)
+                {
+                    SelectedItem(""); ;
+                }
+            }
+            );
         }
         emptySlots = inventorySize;
         //for debugging
@@ -301,10 +322,69 @@ public class PlayerInv : MonoBehaviour
             itemNames[i] = inventory[i].GetName();
             itemAmounts[i] = inventory[i].GetAmount();
         }
+
+        if (isOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                TransferIn();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                TransferOut();
+            }
+        }
+        
     }
 
     public void OpenInventory()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
+        isOpen = !isOpen;
+    }
+
+    
+    public void setDestInv(GameObject destination)
+    {
+        DestinationInv = destination;
+    }
+
+    //transfer in Q         transfer out E
+    private void TransferIn()
+    {
+        if(DestinationInv != null)
+        {
+            if (GetItemAmount(_selectedItem) > 0)
+            {
+                RemoveFromInventory(_selectedItem, 1);
+                DestinationInv.GetComponent<ChestSystem>().AddToInventory(_selectedItem,1,GetItemSprite(_selectedItem));
+            }
+
+        }
+    }
+
+    private void TransferOut()
+    {
+        if (DestinationInv != null)
+        {
+            if (DestinationInv.GetComponent<ChestSystem>().GetItemAmount(_selectedItem) > 0)
+            {
+                AddToInventory(_selectedItem, 1, DestinationInv.GetComponent<ChestSystem>().GetItemSprite(_selectedItem));
+                DestinationInv.GetComponent<ChestSystem>().RemoveFromInventory(_selectedItem, 1);
+            }
+        }
+    }
+
+    public void SelectedItem(string item)
+    {
+        if(item != null)
+        {
+            _selectedItem = item;
+        }
+        else
+        {
+            _selectedItem = "";
+        }
+        
     }
 }

@@ -13,7 +13,10 @@ TagManager:
   - Planter
   - Refinery
   - Robot
-  - Craft
+  - ChestPanel
+  - ChestObject
+  - RobotPanel
+  - RobotInv
   layers:
   - Default
   - TransparentFX

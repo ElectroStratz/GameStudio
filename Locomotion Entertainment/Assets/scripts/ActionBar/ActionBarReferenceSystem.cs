@@ -37,8 +37,8 @@ public class ActionBarReferenceSystem : MonoBehaviour
         //build action bar
         for (int i = 0; i < actionbarSize; i++)
         {
-            Instantiate(actionbarSlot, actionbarPanel.transform);
-            actionbarSlot.transform.parent = actionbarPanel.transform;
+            var slot = Instantiate(actionbarSlot, actionbarPanel.transform);
+            slot.transform.parent = actionbarPanel.transform;
         }
 
         actionbarSlots = actionbarPanel.GetComponentsInChildren<ActionBarSlotSystem>();
@@ -155,6 +155,10 @@ public class ActionBarReferenceSystem : MonoBehaviour
             {
                 actionbarSlots[0].ClearSlot();
             }
+
+        }
+        for (int i = 0; i < _Playerinventory.inventorySize; i++)
+        {
             if (_Playerinventory.inventory[i].GetName() == "Shovel")
             {
                 Sprite icon = _Playerinventory.inventory[i].GetIcon();
@@ -165,6 +169,9 @@ public class ActionBarReferenceSystem : MonoBehaviour
             {
                 actionbarSlots[1].ClearSlot();
             }
+        }
+        for (int i = 0; i < _Playerinventory.inventorySize; i++)
+        { 
             if (_Playerinventory.inventory[i].GetName() == "food")
             {
                 Sprite icon = _Playerinventory.inventory[i].GetIcon();
@@ -173,7 +180,7 @@ public class ActionBarReferenceSystem : MonoBehaviour
             }
             else
             {
-                actionbarSlots[0].ClearSlot();
+                actionbarSlots[2].ClearSlot();
             }
         }
     }

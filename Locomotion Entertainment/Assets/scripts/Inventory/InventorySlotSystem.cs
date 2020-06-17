@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class InventorySlotSystem : MonoBehaviour
 {
-
     public Image icon;
 
-    InventoryItem item;
+    public InventoryItem item;
+
     public void AddItem (InventoryItem newItem)
     {
         item = newItem;

@@ -30,15 +30,15 @@ public class Camera_Controller : MonoBehaviour
 
     void Start()
     {
-        builder = gameManager.GetComponent<BuildSystem>();
+        //builder = gameManager.GetComponent<BuildSystem>();
     }
     void Update()
     {
-        if(builder.GetIsBuilding() == false)
-        {
-            zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-        }
+        //if(builder.GetIsBuilding() == false)
+        //{
+        zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+        //}
 
     }
     void LateUpdate()

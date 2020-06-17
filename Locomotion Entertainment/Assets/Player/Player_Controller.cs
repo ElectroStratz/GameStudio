@@ -63,7 +63,7 @@ public class Player_Controller : MonoBehaviour
                                 player.SetDestination(hitZone.point);
                             }
                             break;
-                        case "Chest":
+                        case "ChestObject":
                             if (Vector3.Distance(player.transform.position, hitZone.point) > 1)
                             {
                                 player.SetDestination(hitZone.point);

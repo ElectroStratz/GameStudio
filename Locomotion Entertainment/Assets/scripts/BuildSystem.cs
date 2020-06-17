@@ -9,6 +9,7 @@ public class BuildSystem : MonoBehaviour
     private GridSystem grid;
     public NavMeshSurface dynamicNavMesh;
     Camera cameraMain;
+    public GameObject buildingPrefab;
     public GameObject buildingBlock;
     //public GameObject buildingReference;
     private GameObject currentPlaceableObject;
@@ -59,7 +60,7 @@ public class BuildSystem : MonoBehaviour
             else
             {
                 Player_Controller.canMove = false;
-                currentPlaceableObject = Instantiate(buildingBlock);
+                currentPlaceableObject = Instantiate(buildingPrefab);
             }
         }
            
@@ -86,6 +87,14 @@ public class BuildSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Destroy(currentPlaceableObject);
+            currentPlaceableObject = Instantiate(buildingBlock);
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                currentPlaceableObject.transform.position = hitInfo.point + Vector3.up * 0.25f;
+                currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+
+            }
             currentPlaceableObject = null;
         }
            

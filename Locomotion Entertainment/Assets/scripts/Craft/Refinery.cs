@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Refinery : MonoBehaviour
 {
+    public GameObject SmelterPanelUI;
     public GameObject SmelterPanel;
     public GameObject CraftSlot;
     public Button craftButton;
@@ -45,6 +47,8 @@ public class Refinery : MonoBehaviour
                 _recipes.Add(new CraftRecipe(items[i].GetName(), items[i].GetComponentsList()));
             }
         }
+
+        CreateSlots();
     }
 
     public void SetRecipe(string item)
@@ -93,7 +97,7 @@ public class Refinery : MonoBehaviour
             string product = _recipes[i].GetProduct();
             GameObject instance = Instantiate(CraftSlot, SmelterPanel.transform);
             instance.transform.parent = SmelterPanel.transform;
-            instance.transform.Find("Text").GetComponent<Text>().text = product;
+            instance.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = product;
             instance.transform.Find("Image").GetComponent<Image>().sprite = _itemList.GetIcon(product);
             Button buttonEvent = instance.GetComponent<Button>();
             buttonEvent.onClick.AddListener(() =>
@@ -104,5 +108,11 @@ public class Refinery : MonoBehaviour
 
         }
 
+    }
+
+    void OnMouseDown()
+    {
+        SmelterPanelUI.SetActive(true);
+        _inventory.inventoryUI.SetActive(true);
     }
 }
