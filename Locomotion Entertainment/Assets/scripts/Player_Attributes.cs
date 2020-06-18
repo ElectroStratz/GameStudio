@@ -8,16 +8,10 @@ public class Player_Attributes : MonoBehaviour
     [SerializeField]
     private float playerHealth;
     private float currentHealth;
-    private float currentOxygen;
+    public float currentOxygen;
 
     [SerializeField]
     private float playerOxygen;
-
-    [SerializeField]
-    private float playerHunger;
-
-    [SerializeField]
-    private float playerThirst;
 
     [SerializeField]
     private Image healthUI;
@@ -25,25 +19,20 @@ public class Player_Attributes : MonoBehaviour
     [SerializeField]
     private Image oxygenUI;
 
-    [SerializeField]
-    private float playerTemperature; //????
 
     void Start()
     {
         playerHealth = 100;
         playerOxygen = 100;
-        playerHunger = 100;
-        playerThirst = 100;
-        //Game Manager Perhaps
         currentHealth = playerHealth;
         currentOxygen = playerOxygen;
-        InvokeRepeating("OxygenLoss", 10, 10);
+        InvokeRepeating("OxygenLoss", 1, 3);
     }
 
     void Update()
     {
         //Testing UI
-        if (Input.GetKeyDown(KeyCode.F))
+        if (currentOxygen <= 0)
         {
             TakeDamage();
         }
@@ -52,13 +41,16 @@ public class Player_Attributes : MonoBehaviour
 
     void TakeDamage()
     {
-        currentHealth -= 1f;
+        currentHealth --;
         healthUI.fillAmount = currentHealth / playerHealth;
     }
 
     void OxygenLoss()
     {
-        currentOxygen -= 1f;
-        oxygenUI.fillAmount = currentOxygen / playerOxygen;
+        if(currentOxygen > 0)
+        {
+            currentOxygen -= 1f;
+            oxygenUI.fillAmount = currentOxygen / playerOxygen;
+        }
     }
 }

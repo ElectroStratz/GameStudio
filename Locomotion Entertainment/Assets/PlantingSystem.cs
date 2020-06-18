@@ -6,16 +6,22 @@ public class PlantingSystem : MonoBehaviour
 {
     public static PlantingSystem instance;
     [SerializeField]
-    private GameObject seedPrefab;
+    private GameObject[] seedPrefabArray;
     private GameObject player;
     private Animator _playeranimator;
     private AudioSource _audiosource;
     public GrowSystem growthScript;
     public bool isOccupied = false;
     public float range = 5f;
+
+
+    GameObject _manager;
+    PlayerInv _playerInv;
     // Start is called before the first frame update
     void Start()
     {
+        _manager = GameObject.FindGameObjectWithTag("GameManager");
+        _playerInv = _manager.GetComponent<PlayerInv>();
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         _playeranimator = player.GetComponentInChildren<Animator>();
@@ -38,13 +44,31 @@ public class PlantingSystem : MonoBehaviour
             }
             else
             {
-                _playeranimator.SetTrigger("Planting");
-                StartCoroutine("ShovelSound");
-                GameObject seedTemp = Instantiate(seedPrefab, transform.position, transform.rotation);
-                seedTemp.transform.parent = gameObject.transform;
-                isOccupied = true;
-                growthScript = seedTemp.GetComponent<GrowSystem>();
-                growthScript.isPlanted = true;
+                if (_playerInv.GetItemAmount("Biomass") > 0)
+                {
+                    GameObject seed;
+                    float rand = Random.Range(0, 1);
+                    if(rand <= 0.33f)
+                    {
+                        seed = seedPrefabArray[0];
+                    }
+                    else if (rand <= 0.66f)
+                    {
+                        seed = seedPrefabArray[1];
+                    }
+                    else
+                    {
+                        seed = seedPrefabArray[2];
+                    }
+                    _playeranimator.SetTrigger("Planting");
+                    StartCoroutine("ShovelSound");
+                    GameObject seedTemp = Instantiate(seed, transform.position, transform.rotation);
+                    seedTemp.transform.parent = gameObject.transform;
+                    isOccupied = true;
+                    growthScript = seedTemp.GetComponent<GrowSystem>();
+                    growthScript.isPlanted = true;
+
+                }
             }
 
         }

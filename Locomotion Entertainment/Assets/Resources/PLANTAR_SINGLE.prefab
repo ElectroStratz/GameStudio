@@ -283,8 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cee7793d2065b742957d56bcc9251d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedPrefab: {fileID: 4949188028902045963, guid: 5cde8730bf7243b4f8428c8d5ec0d813,
-    type: 3}
+  seedPrefabArray:
+  - {fileID: 2271701143011861502, guid: 2f15318167b43a54d8708123fe1e67fa, type: 3}
+  - {fileID: 4949188028902045963, guid: 5cde8730bf7243b4f8428c8d5ec0d813, type: 3}
+  - {fileID: 4722678036262666179, guid: 67e4602c05451f34c8eaaa760caebe6f, type: 3}
   growthScript: {fileID: 8000339308262191081, guid: 5cde8730bf7243b4f8428c8d5ec0d813,
     type: 3}
   isOccupied: 0

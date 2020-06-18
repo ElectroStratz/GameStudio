@@ -1821,7 +1821,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 27aa4d75a37e2224d93c3ffd8671f29e, type: 2}
+  - {fileID: -876546973899608171, guid: 050064b9cec620d41a51d1b61177f734, type: 3}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1861,7 +1861,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: -5053925668127403250, guid: 8b7a7f8f345820c4aae307d82f6ae80a, type: 3}
+  m_Mesh: {fileID: -5611087096184871397, guid: 050064b9cec620d41a51d1b61177f734, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
